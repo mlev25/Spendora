@@ -14,16 +14,16 @@ import java.util.List;
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     //Could be useful for querying specified expenses for many diagrams
     //TODO expand this list if more specific methods are required in the future
-    List<Expense> findByUserID(Long userId);
+    List<Expense> findByUserId(Long userId);
     List<Expense> findByCategoryId(Long categoryId);
     List<Expense> findByDateBetween(LocalDate start, LocalDate end);
     List<Expense> findByUserIdAndDateBetween(Long userId, LocalDate start, LocalDate end);
 
     //Top tiers if needed
-    List<Expense> findTop10ByUserIdOrderByAmountDesc(Long userId);
+    List<Expense> findTop10ByUserIdOrderByPriceDesc(Long userId);
 
     @Query("""
-        SELECT e.category.name, SUM(e.amount) as total
+        SELECT e.category.name, SUM(e.price) as total
         FROM Expense e
         WHERE e.user.id = :userId
         GROUP BY e.category.name
@@ -31,11 +31,11 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     """)
     List<Object[]> findTopCategoriesByUser(@Param("userId") Long userId);
 
-    @Query("SELECT SUM(e.amount) FROM Expense e WHERE e.user.id = :userId AND e.date BETWEEN :start AND :end")
+    @Query("SELECT SUM(e.price) FROM Expense e WHERE e.user.id = :userId AND e.date BETWEEN :start AND :end")
     BigDecimal sumExpensesByUserAndDate(@Param("userId") Long userId,
                                         @Param("start") LocalDate start,
                                         @Param("end") LocalDate end);
 
-    @Query("SELECT e.category.name, SUM(e.amount) FROM Expense e WHERE e.user.id = :userId GROUP BY e.category.name")
+    @Query("SELECT e.category.name, SUM(e.price) FROM Expense e WHERE e.user.id = :userId GROUP BY e.category.name")
     List<Object[]> sumExpensesByCategory(@Param("userId") Long userId);
 }
