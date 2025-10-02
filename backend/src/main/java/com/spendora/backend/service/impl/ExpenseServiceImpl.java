@@ -1,13 +1,12 @@
 package com.spendora.backend.service.impl;
 
 import com.spendora.backend.dto.ExpenseDTO;
-import com.spendora.backend.entity.User;
+import com.spendora.backend.entity.Expense;
 import com.spendora.backend.repository.CategoryRepository;
 import com.spendora.backend.repository.ExpenseRepository;
 import com.spendora.backend.repository.UserRepository;
 import com.spendora.backend.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +36,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public void deleteExpense(Long id) {
+        Optional<Expense> foundExpense = expenseRepository.findById(id);
 
     }
 
