@@ -14,6 +14,7 @@ import java.util.List;
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     //Could be useful for querying specified expenses for many diagrams
     //TODO expand this list if more specific methods are required in the future
+
     List<Expense> findByUserId(Long userId);
     List<Expense> findByCategoryId(Long categoryId);
     List<Expense> findByDateBetween(LocalDate start, LocalDate end);
