@@ -19,23 +19,33 @@ public class UserServiceImpl implements UserService {
 
     //Registration
     public UserDTO register(RegisterDTO registerDTO){
+        if (userRepository.existsByEmail(registerDTO.getEmail())) {
+            throw new IllegalArgumentException("Email már létezik!");
+        }
+        if (userRepository.existsByUsername(registerDTO.getUsername())) {
+            throw new IllegalArgumentException("Username már létezik!");
+        }
+
         User user = new User();
         user.setFirstName(registerDTO.getFirstName());
         user.setLastName(registerDTO.getLastName());
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+
         User savedUser = userRepository.save(user);
         return toDTO(savedUser);
     }
 
     //Simplified Login, needs modification
-    public Optional<UserDTO> login(String email, String rawPassword){
-        Optional<User> identifiedUser = userRepository.findByEmail(email);
-        if (identifiedUser.isPresent() && passwordEncoder.matches(rawPassword, identifiedUser.get().getPassword())){
-            return Optional.of(toDTO(identifiedUser.get()));
+    //TODO JWT integration
+    public Optional<UserDTO> login(String username, String rawPassword) throws IllegalArgumentException{
+        User identifiedUser = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Hibas username vagy jelszo megadva!"));
+        if(!passwordEncoder.matches(rawPassword, identifiedUser.getPassword())){
+            throw new IllegalArgumentException("Hibas email vagy jelszo!");
         }
-        return Optional.empty();
+        return Optional.of(toDTO(identifiedUser));
     }
 
     @Override
