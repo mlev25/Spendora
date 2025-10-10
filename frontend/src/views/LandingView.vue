@@ -1,27 +1,27 @@
 <template>
     <div class="landing-main-content">
 
-        <h1 class="main-title">Pénzügyeid, egyszerűen átláthatóan.</h1>
-        <p class="subtitle">A Spendora segít nyomon követni a kiadásaidat, és mutatja, hol spórolhatsz.</p>
+        <h1 class="main-title">{{ $t('landing.title') }}</h1>
+        <p class="subtitle">{{ $t('landing.subtitle') }}</p>
 
         <div class="card-grid">
 
             <div class="info-card">
-                <h5 class="card-title">💵 Költségkövetés</h5>
-                <p class="card-text">Vidd fel kiadásaidat másodpercek alatt, kategorizálva.</p>
+                <h5 class="card-title">{{ $t('landing.card-left.title') }}</h5>
+                <p class="card-text">{{ $t('landing.card-left.text') }}</p>
             </div>
 
             <div class="cta-card">
-                <h5 class="card-title">🚀 Kezdjük el!</h5>
-                <p class="card-text">Ne várj tovább, regisztrálj és tedd átláthatóvá pénzügyeidet.</p>
+                <h5 class="card-title">{{ $t('landing.card-center.title') }}</h5>
+                <p class="card-text">{{ $t('landing.card-center.text') }}</p>
                 <router-link to="/register" class="cta-btn">
-                    Regisztrálok Most!
+                    {{ $t('landing.card-center.button') }}
                 </router-link>
             </div>
 
             <div class="info-card">
-                <h5 class="card-title">📊 Statisztikák</h5>
-                <p class="card-text">Légy tudatos: nézd meg a kiadásaidat gyönyörű diagramokon.</p>
+                <h5 class="card-title">{{ $t('landing.card-right.title') }}</h5>
+                <p class="card-text">{{ $t('landing.card-right.text') }}</p>
             </div>
         </div>
     </div>

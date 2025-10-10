@@ -2,13 +2,13 @@
   <footer class="app-footer">
     <div class="footer-container">
         <nav class="footer-nav">
-            <router-link to="#" class="footer-link">Rólunk (About)</router-link>
-            <router-link to="#" class="footer-link">Licenc</router-link>
-            <router-link to="#" class="footer-link">Gyakori kérdések</router-link>
+            <router-link to="#" class="footer-link">{{ $t('footer.contact') }}</router-link>
+            <router-link to="#" class="footer-link">{{ $t('footer.about') }}</router-link>
+            <router-link to="#" class="footer-link">{{ $t('footer.q&a') }}</router-link>
         </nav>
 
         <span class="copyright">
-            &copy; 2025 Spendora - Szakdolgozat
+            {{ $t('footer.span') }}
         </span>
     </div>
   </footer>
@@ -58,5 +58,19 @@ export default {
     color: var(--color-text);
 }
 
+
+.footer-nav {
+    display: flex;
+    gap: 28px; /* Növeltük a távolságot a linkek között */
+}
+
+.footer-link {
+    /* A flex-shrink: 0 megakadályozza, hogy a linkek összemenjenek a rövid szöveg hatására */
+    flex-shrink: 0;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
 /* ... a korábban megadott AppFooter.vue (most már app-footer) stílusok kerülnek ide ... */
 </style>

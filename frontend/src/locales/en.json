@@ -1,0 +1,30 @@
+{
+    "header": {
+        "appName": "Spendora",
+        "login": "Login now",
+        "register": "Register"
+    },
+    "footer": {
+        "contact": "Contact",
+        "about": "About Me",
+        "q&a": "FAQ",
+        "span": "© 2025 Spendora. All rights reserved."
+    },
+    "landing": {
+        "title": "Your finances, simply visible.",
+        "subtitle": "Spendora helps you track your expenses and shows you where you can save money.",
+        "card-left": {
+            "title": "💵 Expense Tracking",
+            "text": "Log your expenses in seconds, with optional automatic categorization."
+        },
+        "card-center": {
+            "title": "🚀 Let's Get Started!",
+            "text": "Don't wait, register now and make your finances transparent.",
+            "button": "Register Now!"
+        },
+        "card-right": {
+            "title": "📊 Statistics",
+            "text": "Be conscious: view your spending on beautiful charts, and get advice from our personalized chatbot."
+        }
+    }
+}

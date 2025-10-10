@@ -1,0 +1,30 @@
+{
+    "header":{
+        "appName": "Spendora",
+        "login": "Bejelentkezés",
+        "register": "Regisztráció"
+    },
+    "footer":{
+        "contact": "Kapcsolat",
+        "about": "Rólam",
+        "q&a": "Gyakori kérdések",
+        "span": "© 2025 Spendora. Minden jog fenntartva."
+    },
+    "landing":{
+        "title": "Pénzügyeid, egyszerűen átláthatóan.",
+        "subtitle": "A Spendora segít nyomon követni a kiadásaidat, és mutatja, hol spórolhatsz.",
+        "card-left":{
+            "title": "💵 Költségkövetés",
+            "text": "Vidd fel kiadásaidat másodpercek alatt, akár automatikusan kategorizálva."
+        },
+        "card-center":{
+            "title": "🚀 Kezdjük el!",
+            "text": "Ne várj tovább, regisztrálj és tedd átláthatóvá pénzügyeidet.",
+            "button": "Regisztrálok Most!"
+        },
+        "card-right":{
+            "title": "📊 Statisztikák",
+            "text": "Légy tudatos: nézd meg a kiadásaidat gyönyörű diagramokon, és kérj tanácsot a személyreszabott chatbotunktól."
+        }
+    }
+}
