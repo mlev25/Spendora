@@ -29,10 +29,6 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable Long id) {
-        Optional<UserDTO> userDTO = userService.findById(id);
-        return userDTO.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    // REMOVED: Security risk - users should only access their own data via /me endpoint
+    // If you need user lookup by ID, add @PreAuthorize("hasRole('ADMIN')") annotation
 }
