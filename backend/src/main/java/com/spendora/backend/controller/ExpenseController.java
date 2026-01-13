@@ -21,6 +21,10 @@ public class ExpenseController {
 
     @PostMapping
     public ResponseEntity<?> addNewExpense(@Valid @RequestBody ExpenseDTO expenseDTO, Authentication authentication){
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        
         try {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             expenseDTO.setUserId(userPrincipal.getId()); // Force current user ID
@@ -34,8 +38,13 @@ public class ExpenseController {
 
     @GetMapping
     public ResponseEntity<?> getMyExpenses(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        
         try {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            System.out.println(userPrincipal.getId() + userPrincipal.getName());
             List<ExpenseDTO> expenses = expenseService.getAllExpenses(userPrincipal.getId());
             return ResponseEntity.ok(expenses);
         } catch (Exception e) {
@@ -45,6 +54,10 @@ public class ExpenseController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getExpenseById(@PathVariable Long id, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         Optional<ExpenseDTO> expense = expenseService.findById(id);
         
@@ -59,6 +72,10 @@ public class ExpenseController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateExpense(@PathVariable Long id, @Valid @RequestBody ExpenseDTO expenseDTO, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        
         try {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             
@@ -79,6 +96,10 @@ public class ExpenseController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteExpense(@PathVariable Long id, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        
         try {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             

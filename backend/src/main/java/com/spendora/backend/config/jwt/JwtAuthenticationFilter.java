@@ -27,30 +27,40 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
 
-        try {
+        String requestURI = request.getRequestURI();
+        
+        // Auth endpoints can use session (needed for CAPTCHA flow)
+        // Protected endpoints require JWT - ignore any existing session
+        if (!requestURI.startsWith("/api/auth/")) {
+            // Protected endpoint - require JWT token
             String header = request.getHeader("Authorization");
-            String token = null;
-
-            if (header != null && header.startsWith("Bearer ")) {
-                token = header.substring(7);
+            
+            if (header == null || !header.startsWith("Bearer ")) {
+                // No JWT header means no authentication, proceed without setting context
+                filterChain.doFilter(request, response);
+                return;
             }
+            
+            try {
+                String token = header.substring(7);
+                
+                if (jwtUtils.validateJwtToken(token)) {
+                    String username = jwtUtils.getUsernameFromJwt(token);
+                    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                        UserPrincipal userDetails =
+                                (UserPrincipal) userDetailsService.loadUserByUsername(username);
 
-            if (token != null && jwtUtils.validateJwtToken(token)) {
-                String username = jwtUtils.getUsernameFromJwt(token);
-                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                    UserPrincipal userDetails =
-                            (UserPrincipal) userDetailsService.loadUserByUsername(username);
+                        UsernamePasswordAuthenticationToken authentication =
+                                new UsernamePasswordAuthenticationToken(
+                                        userDetails, null, userDetails.getAuthorities());
 
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(
-                                    userDetails, null, userDetails.getAuthorities());
-
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
                 }
+            } catch (Exception e) {
+                System.err.println("Cannot set user authentication: " + e.getMessage());
             }
-        } catch (Exception e) {
-            System.err.println("Cannot set user authentication: " + e.getMessage());
         }
 
         filterChain.doFilter(request, response);
