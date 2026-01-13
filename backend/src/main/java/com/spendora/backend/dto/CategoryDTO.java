@@ -10,7 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDTO {
+    private Long id;
+    
     @NotBlank(message = "Category name must not be blank")
-    @Size(max = 50, message = "Category name can be at most 100 characters")
+    @Size(max = 50, message = "Category name can be at most 50 characters")
     private String name;
+    
+    private String color;
+    
+    private String icon;
 }

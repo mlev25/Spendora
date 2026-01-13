@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginDTO {
-
-    @NotBlank(message = "Username must not be blank")
+    @NotBlank(message = "A felhasználónév nem lehet üres.")
     private String username;
 
-    @NotBlank(message = "Password must not be blank")
+    @NotBlank(message = "A jelszó nem lehet üres.")
     private String password;
+
+    private String captchaAnswer;
 }

@@ -11,11 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterDTO {
-    @NotBlank(message = "Firstname must not be blank")
-    private String firstName;
-
-    @NotBlank(message = "Lastname must not be blank")
-    private String lastName;
+    @NotBlank(message = "Name must not be blank")
+    private String name;
 
     @NotBlank(message = "Username must not be blank!")
     private String username;
@@ -27,4 +24,7 @@ public class RegisterDTO {
     @NotBlank(message = "The Given password must not be blank")
     @Size(min = 6, message = "Given password must be at least 6 characters")
     private String password;
+
+    @NotBlank(message = "The given Role must not be blank.")
+    private String role;
 }
