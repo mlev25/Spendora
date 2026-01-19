@@ -39,4 +39,69 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     @Query("SELECT e.category.name, SUM(e.price) FROM Expense e WHERE e.user.id = :userId GROUP BY e.category.name")
     List<Object[]> sumExpensesByCategory(@Param("userId") Long userId);
+
+    // Statistics queries
+    @Query("""
+        SELECT SUM(e.price) FROM Expense e 
+        WHERE e.user.id = :userId 
+        AND YEAR(e.date) = :year 
+        AND MONTH(e.date) = :month
+    """)
+    BigDecimal sumByUserAndYearAndMonth(@Param("userId") Long userId, 
+                                         @Param("year") Integer year, 
+                                         @Param("month") Integer month);
+
+    @Query("""
+        SELECT COUNT(e) FROM Expense e 
+        WHERE e.user.id = :userId 
+        AND YEAR(e.date) = :year 
+        AND MONTH(e.date) = :month
+    """)
+    Long countByUserAndYearAndMonth(@Param("userId") Long userId, 
+                                     @Param("year") Integer year, 
+                                     @Param("month") Integer month);
+
+    @Query("""
+        SELECT SUM(e.price) FROM Expense e 
+        WHERE e.user.id = :userId 
+        AND YEAR(e.date) = :year
+    """)
+    BigDecimal sumByUserAndYear(@Param("userId") Long userId, @Param("year") Integer year);
+
+    @Query("""
+        SELECT MONTH(e.date), SUM(e.price) FROM Expense e
+        WHERE e.user.id = :userId 
+        AND YEAR(e.date) = :year 
+        GROUP BY MONTH(e.date) 
+        ORDER BY MONTH(e.date)
+    """)
+    List<Object[]> monthlyBreakdownByYear(@Param("userId") Long userId, @Param("year") Integer year);
+
+    @Query("""
+        SELECT e.category.id, e.category.name, e.category.color, e.category.icon, 
+               SUM(e.price), COUNT(e) 
+        FROM Expense e 
+        WHERE e.user.id = :userId 
+        AND e.date BETWEEN :startDate AND :endDate 
+        GROUP BY e.category.id, e.category.name, e.category.color, e.category.icon 
+        ORDER BY SUM(e.price) DESC
+    """)
+    List<Object[]> categorySpendingByDateRange(@Param("userId") Long userId, 
+                                                 @Param("startDate") LocalDate startDate, 
+                                                 @Param("endDate") LocalDate endDate);
+
+    @Query("SELECT SUM(e.price) FROM Expense e WHERE e.user.id = :userId")
+    BigDecimal sumAllByUser(@Param("userId") Long userId);
+
+    @Query("SELECT COUNT(e) FROM Expense e WHERE e.user.id = :userId")
+    Long countAllByUser(@Param("userId") Long userId);
+
+    @Query("SELECT AVG(e.price) FROM Expense e WHERE e.user.id = :userId")
+    BigDecimal avgByUser(@Param("userId") Long userId);
+
+    @Query("SELECT MAX(e.price) FROM Expense e WHERE e.user.id = :userId")
+    BigDecimal maxByUser(@Param("userId") Long userId);
+
+    @Query("SELECT MIN(e.price) FROM Expense e WHERE e.user.id = :userId")
+    BigDecimal minByUser(@Param("userId") Long userId);
 }
