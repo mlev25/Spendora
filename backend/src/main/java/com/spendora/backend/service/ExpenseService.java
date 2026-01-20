@@ -1,7 +1,8 @@
 package com.spendora.backend.service;
 
-import com.spendora.backend.dto.ExpenseDTO;
+import com.spendora.backend.dto.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,4 +13,10 @@ public interface ExpenseService {
     void deleteExpense(Long id);
     Optional<ExpenseDTO> findById(Long id);
     List<ExpenseDTO> listAllExpensesByUser(Long userId);
+    
+    // Statistics methods
+    MonthlyStatisticsDTO getMonthlyStatistics(Long userId, Integer year, Integer month);
+    YearlyStatisticsDTO getYearlyStatistics(Long userId, Integer year);
+    List<CategorySpendingDTO> getCategorySpending(Long userId, LocalDate startDate, LocalDate endDate);
+    ExpenseSummaryDTO getExpenseSummary(Long userId);
 }
