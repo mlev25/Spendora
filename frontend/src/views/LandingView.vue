@@ -37,85 +37,140 @@ export default {
 <style scoped>
 .landing-main-content {
     text-align: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 3rem 1rem;
     background-color: var(--color-background);
+    min-height: 70vh;
 }
 
 .main-title {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    /* A szöveg színe a globális --color-text-et használja */
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Dinamikus méretezés */
+    margin-bottom: 1rem;
     color: var(--color-text);
+    font-weight: 800;
+    line-height: 1.2;
 }
 
 .subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 50px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Dinamikus méretezés */
+    margin-bottom: 3rem;
     color: var(--color-text);
+    opacity: 0.9;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* A 3 kártya elrendezése CSS Grid-del */
 .card-grid {
     display: grid;
-    /* Alapértelmezésben 1 oszlop mobilra, 20px távolsággal */
-    grid-template-columns: 1fr; 
-    gap: 20px;
+    gap: clamp(1rem, 2vw, 2rem); /* Dinamikus gap */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-/* Reszponzivitás: 768px felett 3 egyenlő oszlop */
-@media (min-width: 768px) {
+/* Mobil: 1 oszlop (alapértelmezett) */
+.card-grid {
+    grid-template-columns: 1fr;
+}
+
+/* Tablet: 2 oszlop (középső kártya alulra kerül) */
+@media (min-width: 640px) and (max-width: 1023px) {
     .card-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 egyenlő szélességű oszlop */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-card {
+        grid-column: 1 / -1; /* A CTA kártya a teljes szélességet foglalja */
     }
 }
 
-/* Kártya alap stílus: HASZNÁLJA A TÉMA VÁLTOZÓKAT! */
+/* Desktop: 3 oszlop */
+@media (min-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Nagy képernyők: maximális szélesség korlátozása */
+@media (min-width: 1400px) {
+    .card-grid {
+        grid-template-columns: repeat(3, minmax(300px, 450px));
+    }
+}
+
+/* Kártya alap stílus */
 .info-card, .cta-card {
-    padding: 30px;
-    border-radius: 10px;
+    padding: clamp(1.5rem, 3vw, 2.5rem); /* Dinamikus padding */
+    border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
-    border: 1px solid var(--color-border); /* Téma-függő szegély */
-    background-color: var(--color-card-bg); /* Téma-függő háttér */
-    color: var(--color-text); /* Téma-függő szövegszín */
+    transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-card-bg);
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
 }
 
-.info-card:hover {
-    transform: translateY(-10px);
-}
+/* Hover effekt csak desktop-on */
+@media (min-width: 1024px) {
+    .info-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
 
-.cta-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 20px color-mix(in srgb, var(--color-primary) 50%, black);
+    .cta-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--color-primary) 60%, black);
+    }
 }
 
 .card-title {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem); /* Dinamikus méretezés */
+    margin-bottom: 1rem;
     font-weight: bold;
+}
+
+.card-text {
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem); /* Dinamikus méretezés */
+    line-height: 1.6;
 }
 
 /* CTA kártya kiemelése */
 .cta-card {
-    background-color: var(--color-primary); /* Mindig a kék/kiemelő színt használja */
-    color: white; /* A CTA kártyában a szöveg mindig fehér, a jobb olvashatóságért */
+    background-color: var(--color-primary);
+    color: white;
     box-shadow: 0 6px 20px color-mix(in srgb, var(--color-primary) 50%, black);
 }
 
 .cta-btn {
     display: inline-block;
-    padding: 10px 20px;
-    margin-top: 20px;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1.5rem;
     background-color: white;
     color: var(--color-primary);
     text-decoration: none;
     font-weight: bold;
-    border-radius: 6px;
-    transition: background-color 0.3s;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
 }
+
 .cta-btn:hover {
     background-color: rgb(7, 255, 205);
+    transform: scale(1.05);
+}
+
+/* Kis képernyőkön (mobil) */
+@media (max-width: 639px) {
+    .landing-main-content {
+        padding: 2rem 0.5rem;
+    }
+    
+    .info-card, .cta-card {
+        min-height: 200px;
+    }
 }
 </style>

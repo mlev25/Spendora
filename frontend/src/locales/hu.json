@@ -2,7 +2,9 @@
     "header":{
         "appName": "Spendora",
         "login": "Bejelentkezés",
-        "register": "Regisztráció"
+        "register": "Regisztráció",
+        "welcome": "Üdv",
+        "logout": "Kijelentkezés"
     },
     "footer":{
         "contact": "Kapcsolat",
@@ -26,5 +28,53 @@
             "title": "📊 Statisztikák",
             "text": "Légy tudatos: nézd meg a kiadásaidat gyönyörű diagramokon, és kérj tanácsot a személyreszabott chatbotunktól."
         }
+    },
+    "login": {
+        "title": "Bejelentkezés",
+        "username": "Felhasználónév",
+        "usernamePlaceholder": "Add meg a felhasználóneved",
+        "password": "Jelszó",
+        "passwordPlaceholder": "Add meg a jelszavad",
+        "captcha": "CAPTCHA ellenőrzés",
+        "captchaPlaceholder": "Írd be a képen látható karaktereket",
+        "loginButton": "Bejelentkezés",
+        "loggingIn": "Bejelentkezés...",
+        "noAccount": "Még nincs fiókod?",
+        "registerLink": "Regisztrálj itt!",
+        "captchaRequired": "Túl sok sikertelen próbálkozás! Kérlek, add meg a CAPTCHA kódot.",
+        "loginFailed": "Hibás felhasználónév vagy jelszó!",
+        "success": "Sikeres bejelentkezés! Átirányítás...",
+        "unknownError": "Ismeretlen hiba történt. Próbáld újra!",
+        "networkError": "Hálózati hiba. Ellenőrizd az internetkapcsolatot!",
+        "captchaLoadError": "A CAPTCHA betöltése sikertelen."
+    },
+    "register": {
+        "title": "Regisztráció",
+        "name": "Teljes név",
+        "namePlaceholder": "Add meg a teljes neved",
+        "username": "Felhasználónév",
+        "usernamePlaceholder": "Válassz egy felhasználónevet",
+        "email": "Email cím",
+        "emailPlaceholder": "Add meg az email címed",
+        "password": "Jelszó",
+        "passwordPlaceholder": "Válassz egy erős jelszót",
+        "passwordHint": "A jelszónak legalább 6 karakter hosszúnak kell lennie.",
+        "confirmPassword": "Jelszó megerősítése",
+        "confirmPasswordPlaceholder": "Add meg újra a jelszavad",
+        "role": "Szerepkör",
+        "selectRole": "Válassz szerepkört",
+        "roleUser": "Felhasználó",
+        "roleAdmin": "Adminisztrátor",
+        "registerButton": "Regisztráció",
+        "registering": "Regisztráció...",
+        "hasAccount": "Már van fiókod?",
+        "loginLink": "Jelentkezz be itt!",
+        "passwordMismatch": "A két jelszó nem egyezik!",
+        "passwordTooShort": "A jelszónak legalább 6 karakter hosszúnak kell lennie.",
+        "usernameTaken": "Ez a felhasználónév már foglalt!",
+        "emailTaken": "Ez az email cím már használatban van!",
+        "success": "Sikeres regisztráció! Átirányítás a bejelentkezéshez...",
+        "unknownError": "Ismeretlen hiba történt. Próbáld újra!",
+        "networkError": "Hálózati hiba. Ellenőrizd az internetkapcsolatot!"
     }
 }

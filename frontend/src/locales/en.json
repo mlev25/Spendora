@@ -2,7 +2,9 @@
     "header": {
         "appName": "Spendora",
         "login": "Login now",
-        "register": "Register"
+        "register": "Register",
+        "welcome": "Welcome",
+        "logout": "Logout"
     },
     "footer": {
         "contact": "Contact",
@@ -26,5 +28,53 @@
             "title": "📊 Statistics",
             "text": "Be conscious: view your spending on beautiful charts, and get advice from our personalized chatbot."
         }
+    },
+    "login": {
+        "title": "Login",
+        "username": "Username",
+        "usernamePlaceholder": "Enter your username",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "captcha": "CAPTCHA verification",
+        "captchaPlaceholder": "Enter the characters shown in the image",
+        "loginButton": "Login",
+        "loggingIn": "Logging in...",
+        "noAccount": "Don't have an account yet?",
+        "registerLink": "Register here!",
+        "captchaRequired": "Too many failed attempts! Please enter the CAPTCHA code.",
+        "loginFailed": "Invalid username or password!",
+        "success": "Login successful! Redirecting...",
+        "unknownError": "An unknown error occurred. Please try again!",
+        "networkError": "Network error. Please check your internet connection!",
+        "captchaLoadError": "Failed to load CAPTCHA."
+    },
+    "register": {
+        "title": "Registration",
+        "name": "Full Name",
+        "namePlaceholder": "Enter your full name",
+        "username": "Username",
+        "usernamePlaceholder": "Choose a username",
+        "email": "Email Address",
+        "emailPlaceholder": "Enter your email address",
+        "password": "Password",
+        "passwordPlaceholder": "Choose a strong password",
+        "passwordHint": "Password must be at least 6 characters long.",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Re-enter your password",
+        "role": "Role",
+        "selectRole": "Select a role",
+        "roleUser": "User",
+        "roleAdmin": "Administrator",
+        "registerButton": "Register",
+        "registering": "Registering...",
+        "hasAccount": "Already have an account?",
+        "loginLink": "Login here!",
+        "passwordMismatch": "The two passwords do not match!",
+        "passwordTooShort": "Password must be at least 6 characters long.",
+        "usernameTaken": "This username is already taken!",
+        "emailTaken": "This email address is already in use!",
+        "success": "Registration successful! Redirecting to login...",
+        "unknownError": "An unknown error occurred. Please try again!",
+        "networkError": "Network error. Please check your internet connection!"
     }
 }
