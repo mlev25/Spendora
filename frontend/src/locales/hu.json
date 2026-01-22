@@ -76,5 +76,141 @@
         "success": "Sikeres regisztráció! Átirányítás a bejelentkezéshez...",
         "unknownError": "Ismeretlen hiba történt. Próbáld újra!",
         "networkError": "Hálózati hiba. Ellenőrizd az internetkapcsolatot!"
+    },
+    "home": {
+        "welcome": "Üdvözlünk",
+        "subtitle": "Itt kezelheted pénzügyeidet és nyomon követheted kiadásaidat",
+        "stats": {
+            "title": "Statisztikák",
+            "description": "Tekintsd meg kiadásaidat és megtakarításaidat",
+            "totalExpenses": "Összes kiadás",
+            "thisMonth": "Ebben a hónapban"
+        },
+        "addExpense": {
+            "title": "Új Kiadás",
+            "description": "Adj hozzá egy új kiadást gyorsan és egyszerűen",
+            "button": "Kiadás hozzáadása"
+        },
+        "categories": {
+            "title": "Kategóriák",
+            "description": "Kezeld és szerkeszd a kiadási kategóriáidat",
+            "button": "Kategóriák kezelése"
+        },
+        "chatbot": {
+            "title": "Pénzügyi Asszisztens",
+            "description": "Kérdezz a chatbottól pénzügyi tanácsokat",
+            "button": "Chat indítása"
+        },
+        "info": {
+            "lastLogin": "Utolsó bejelentkezés",
+            "accountType": "Fiók típusa",
+            "noData": "Nincs adat"
+        }
+    },
+    "contact": {
+        "title": "Kapcsolat",
+        "subtitle": "Lépj velünk kapcsolatba! Szívesen segítünk bármilyen kérdésben.",
+        "email": {
+            "title": "Email"
+        },
+        "social": {
+            "title": "Közösségi média"
+        },
+        "form": {
+            "title": "Küldjnél üzenetet",
+            "name": "Név",
+            "email": "Email cím",
+            "subject": "Tárgy",
+            "message": "Üzenet",
+            "send": "Üzenet küldése",
+            "sending": "Küldés...",
+            "success": "Üzenet sikeresen elküldve! Hamarosan válaszolunk."
+        }
+    },
+    "about": {
+        "title": "Rólunk",
+        "subtitle": "Ismerd meg a Spendora projektet",
+        "project": {
+            "title": "Mi az a Spendora?",
+            "description1": "A Spendora egy modern pénzügyi nyilvántartó alkalmazás, amely segít a havi kiadások nyomon követésében és elemzésében. Célja, hogy egyszerű és intuitív módon kezelhesd pénzügyeidet.",
+            "description2": "Az alkalmazás lehetővé teszi kiadásaid kategorizálását, részletes statisztikák megtekintését, és egy AI-alapú chatbot segítségével személyre szabott pénzügyi tanácsokat kaphatsz."
+        },
+        "features": {
+            "title": "Főbb Funkciók",
+            "expense": {
+                "title": "Kiadások követése",
+                "description": "Rögzítsd és kategorizáld kiadásaidat egyszerűen"
+            },
+            "statistics": {
+                "title": "Statisztikák",
+                "description": "Részletes grafikonok és elemzések"
+            },
+            "categories": {
+                "title": "Kategóriák",
+                "description": "Előre definiált kiadási kategóriák"
+            },
+            "chatbot": {
+                "title": "AI Asszisztens",
+                "description": "Személyre szabott pénzügyi tanácsadás"
+            }
+        },
+        "tech": {
+            "title": "Technológiák"
+        },
+        "creator": {
+            "title": "A Készítő",
+            "description": "Ez az alkalmazás egy szakdolgozat projekt részeként készült.",
+            "thesis": "A projekt célja modern web technológiák bemutatása és egy valós használati eset megvalósítása.",
+            "contact": "Kapcsolatfelvétel"
+        },
+        "license": "Minden jog fenntartva."
+    },
+    "faq": {
+        "title": "Gyakori Kérdések",
+        "subtitle": "Válaszok a leggyakrabban feltett kérdésekre",
+        "items": {
+            "whatIs": {
+                "question": "Mi az a Spendora?",
+                "answer": "A Spendora egy ingyenes pénzügyi nyilvántartó alkalmazás, amely segít nyomon követni havi kiadásaidat, kategorizálni azokat, és részletes statisztikákat készíteni költési szokásaidról."
+            },
+            "howToRegister": {
+                "question": "Hogyan regisztrálhatok?",
+                "answer": "Kattints a 'Regisztráció' gombra a főoldalon, add meg az adataidat (név, email, jelszó), és máris használhatod az alkalmazást. A regisztráció teljesen ingyenes!"
+            },
+            "isFree": {
+                "question": "Ingyenes az alkalmazás?",
+                "answer": "Igen, a Spendora jelenleg teljesen ingyenes. Nincsenek rejtett költségek vagy előfizetési díjak."
+            },
+            "dataSecure": {
+                "question": "Biztonságban vannak az adataim?",
+                "answer": "Igen! Az összes adatot titkosítva tároljuk, és modern biztonsági protokollokat használunk. A jelszavak hash-elve vannak tárolva, és JWT tokenekkel védett a kommunikáció."
+            },
+            "howToAddExpense": {
+                "question": "Hogyan adhatok hozzá új kiadást?",
+                "answer": "A bejelentkezés után a főoldalon találod az 'Új Kiadás' gombot. Kattints rá, add meg a kiadás összegét, kategóriáját és dátumát, majd mentsd el."
+            },
+
+            "statistics": {
+                "question": "Milyen statisztikákat láthatok?",
+                "answer": "Havi és éves összesítéseket, kategóriánkénti bontást, trendeket és összehasonlításokat. A grafikonok vizuálisan mutatják be költési szokásaidat."
+            },
+            "mobile": {
+                "question": "Működik mobilon is?",
+                "answer": "Igen! A Spendora teljesen reszponzív, így minden eszközön (telefon, tablet, számítógép) kényelmesen használható."
+            },
+            "forgotPassword": {
+                "question": "Elfelejtettem a jelszavam, mit tegyek?",
+                "answer": "Jelenleg fejlesztés alatt áll a jelszó visszaállítási funkció. Addig írj nekünk a kapcsolat oldalon, és segítünk."
+            },
+            "deleteAccount": {
+                "question": "Törölhetem a fiókomat?",
+                "answer": "Igen, a beállítások menüben megtalálod a fiók törlési opciót. Figyelem: ez véglegesen törli az összes adatodat!"
+            }
+        },
+        "help": {
+            "title": "Nem találod a választ?",
+            "description": "Ha további kérdésed van, vedd fel velünk a kapcsolatot!",
+            "button": "Kapcsolatfelvétel"
+        }
     }
 }

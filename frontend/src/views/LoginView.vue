@@ -134,7 +134,7 @@ export default {
         
         // Átirányítás a főoldalra vagy dashboard-ra
         setTimeout(() => {
-          this.$router.push('/');
+          this.$router.push('/home');
         }, 1500);
 
       } catch (error) {

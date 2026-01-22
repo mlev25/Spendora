@@ -76,5 +76,140 @@
         "success": "Registration successful! Redirecting to login...",
         "unknownError": "An unknown error occurred. Please try again!",
         "networkError": "Network error. Please check your internet connection!"
+    },
+    "home": {
+        "welcome": "Welcome",
+        "subtitle": "Manage your finances and track your expenses here",
+        "stats": {
+            "title": "Statistics",
+            "description": "View your expenses and savings",
+            "totalExpenses": "Total Expenses",
+            "thisMonth": "This Month"
+        },
+        "addExpense": {
+            "title": "New Expense",
+            "description": "Add a new expense quickly and easily",
+            "button": "Add Expense"
+        },
+        "categories": {
+            "title": "Categories",
+            "description": "Manage and edit your expense categories",
+            "button": "Manage Categories"
+        },
+        "chatbot": {
+            "title": "Financial Assistant",
+            "description": "Ask the chatbot for financial advice",
+            "button": "Start Chat"
+        },
+        "info": {
+            "lastLogin": "Last Login",
+            "accountType": "Account Type",
+            "noData": "No data"
+        }
+    },
+    "contact": {
+        "title": "Contact",
+        "subtitle": "Get in touch with us! We're happy to help with any questions.",
+        "email": {
+            "title": "Email"
+        },
+        "social": {
+            "title": "Social Media"
+        },
+        "form": {
+            "title": "Send us a message",
+            "name": "Name",
+            "email": "Email address",
+            "subject": "Subject",
+            "message": "Message",
+            "send": "Send Message",
+            "sending": "Sending...",
+            "success": "Message sent successfully! We'll respond soon."
+        }
+    },
+    "about": {
+        "title": "About Us",
+        "subtitle": "Learn about the Spendora project",
+        "project": {
+            "title": "What is Spendora?",
+            "description1": "Spendora is a modern financial tracking application that helps you monitor and analyze your monthly expenses. Its goal is to help you manage your finances in a simple and intuitive way.",
+            "description2": "The application allows you to categorize your expenses, view detailed statistics, and get personalized financial advice with the help of an AI-powered chatbot."
+        },
+        "features": {
+            "title": "Main Features",
+            "expense": {
+                "title": "Expense Tracking",
+                "description": "Record and categorize your expenses easily"
+            },
+            "statistics": {
+                "title": "Statistics",
+                "description": "Detailed charts and analytics"
+            },
+            "categories": {
+                "title": "Categories",
+                "description": "Predefined expense categories"
+            },
+            "chatbot": {
+                "title": "AI Assistant",
+                "description": "Personalized financial consulting"
+            }
+        },
+        "tech": {
+            "title": "Technologies"
+        },
+        "creator": {
+            "title": "The Creator",
+            "description": "This application was created as part of a thesis project.",
+            "thesis": "The project's goal is to showcase modern web technologies and implement a real-world use case.",
+            "contact": "Get in touch"
+        },
+        "license": "All rights reserved."
+    },
+    "faq": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Answers to the most frequently asked questions",
+        "items": {
+            "whatIs": {
+                "question": "What is Spendora?",
+                "answer": "Spendora is a free financial tracking application that helps you monitor your monthly expenses, categorize them, and create detailed statistics about your spending habits."
+            },
+            "howToRegister": {
+                "question": "How do I register?",
+                "answer": "Click the 'Register' button on the homepage, enter your details (name, email, password), and you can start using the application. Registration is completely free!"
+            },
+            "isFree": {
+                "question": "Is the application free?",
+                "answer": "Yes, Spendora is currently completely free. There are no hidden costs or subscription fees."
+            },
+            "dataSecure": {
+                "question": "Is my data secure?",
+                "answer": "Yes! All data is stored encrypted and we use modern security protocols. Passwords are hashed and communication is protected with JWT tokens."
+            },
+            "howToAddExpense": {
+                "question": "How do I add a new expense?",
+                "answer": "After logging in, you'll find the 'New Expense' button on the homepage. Click it, enter the expense amount, category and date, then save."
+            },
+            "statistics": {
+                "question": "What statistics can I see?",
+                "answer": "Monthly and yearly summaries, category breakdowns, trends and comparisons. Charts visually present your spending habits."
+            },
+            "mobile": {
+                "question": "Does it work on mobile?",
+                "answer": "Yes! Spendora is fully responsive, so it's comfortable to use on all devices (phone, tablet, computer)."
+            },
+            "forgotPassword": {
+                "question": "I forgot my password, what should I do?",
+                "answer": "The password reset feature is currently under development. In the meantime, contact us on the contact page and we'll help."
+            },
+            "deleteAccount": {
+                "question": "Can I delete my account?",
+                "answer": "Yes, you'll find the account deletion option in the settings menu. Warning: this permanently deletes all your data!"
+            }
+        },
+        "help": {
+            "title": "Can't find the answer?",
+            "description": "If you have more questions, contact us!",
+            "button": "Contact Us"
+        }
     }
 }
