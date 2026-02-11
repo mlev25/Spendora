@@ -231,6 +231,7 @@
         "descriptionPlaceholder": "Optional note",
         "actions": "Actions",
         "unknown": "Unknown",
+        "delete": "Delete",
         "deleteConfirm": "Are you sure you want to delete this expense: {name}?",
         "saveError": "Error occurred while saving!",
         "deleteError": "Error occurred while deleting!",
@@ -241,6 +242,12 @@
         "save": "Save",
         "saving": "Saving...",
         "loading": "Loading"
+    },
+    "roles": {
+        "USER": "User",
+        "ADMIN": "Administrator",
+        "ROLE_USER": "User",
+        "ROLE_ADMIN": "Administrator"
     },
     "profile": {
         "title": "My Profile",

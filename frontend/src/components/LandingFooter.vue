@@ -36,9 +36,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    width: 90%;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .footer-nav {

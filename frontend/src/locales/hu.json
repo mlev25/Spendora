@@ -232,6 +232,7 @@
         "descriptionPlaceholder": "Opcionális megjegyzés",
         "actions": "Műveletek",
         "unknown": "Ismeretlen",
+        "delete": "Törlés",
         "deleteConfirm": "Biztosan törölni szeretnéd ezt a kiadást: {name}?",
         "saveError": "Hiba történt a mentés során!",
         "deleteError": "Hiba történt a törlés során!",
@@ -242,6 +243,12 @@
         "save": "Mentés",
         "saving": "Mentés...",
         "loading": "Betöltés"
+    },
+    "roles": {
+        "USER": "Alapfelhasználó",
+        "ADMIN": "Adminisztrátor",
+        "ROLE_USER": "Alapfelhasználó",
+        "ROLE_ADMIN": "Adminisztrátor"
     },
     "profile": {
         "title": "Profilom",

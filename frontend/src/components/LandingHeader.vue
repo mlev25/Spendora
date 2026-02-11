@@ -98,8 +98,8 @@ export default {
     justify-content: space-between;
     align-items: center;
     max-width: 1400px;
-    width: 95%;
     margin: 0 auto;
+    padding: 0 1rem;
     gap: 1rem;
 }
 
@@ -238,7 +238,7 @@ export default {
     }
 
     .header-container {
-        width: 98%;
+        padding: 0 0.5rem;
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.5rem;

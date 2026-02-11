@@ -54,14 +54,14 @@
                   @click="$emit('edit', expense)"
                   :title="$t('expense.edit')"
                 >
-                  ✏️
+                  <img src="/pencil.png" alt="Edit" class="icon-img" />
                 </button>
                 <button
                   class="btn-icon btn-delete"
                   @click="handleDelete(expense)"
                   :title="$t('expense.delete')"
                 >
-                  🗑️
+                  <img src="/bin.png" alt="Delete" class="icon-img" />
                 </button>
               </div>
             </td>
@@ -254,11 +254,25 @@ export default {
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-img {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .btn-icon:hover {
   background-color: var(--color-background);
   transform: scale(1.1);
+}
+
+.btn-edit:hover {
+  border-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
 }
 
 .btn-delete:hover {

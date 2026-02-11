@@ -113,7 +113,8 @@ export default {
     },
     userRole() {
       const authStore = useAuthStore();
-      return authStore.user?.roles?.[0] || 'USER';
+      const role = authStore.user?.roles?.[0] || 'USER';
+      return this.$t(`roles.${role}`);
     },
     formattedLastLogin() {
       const authStore = useAuthStore();

@@ -69,33 +69,26 @@ export default {
     padding: 0 1rem;
 }
 
-/* Mobil: 1 oszlop (alapértelmezett) */
+/* Mobil és Tablet: 1 oszlop középre igazítva, max szélességgel */
 .card-grid {
     grid-template-columns: 1fr;
+    justify-items: center;
 }
 
-/* Tablet: 2 oszlop (középső kártya alulra kerül) */
-@media (min-width: 640px) and (max-width: 1023px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .cta-card {
-        grid-column: 1 / -1; /* A CTA kártya a teljes szélességet foglalja */
-    }
+.info-card, .cta-card {
+    width: 100%;
+    max-width: clamp(300px, 80vw, 600px);
 }
 
 /* Desktop: 3 oszlop */
 @media (min-width: 1024px) {
     .card-grid {
         grid-template-columns: repeat(3, 1fr);
+        justify-items: stretch;
     }
-}
-
-/* Nagy képernyők: maximális szélesség korlátozása */
-@media (min-width: 1400px) {
-    .card-grid {
-        grid-template-columns: repeat(3, minmax(300px, 450px));
+    
+    .info-card, .cta-card {
+        max-width: none;
     }
 }
 
