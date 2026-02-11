@@ -1,9 +1,14 @@
 package com.spendora.backend.controller;
 
 import com.spendora.backend.config.jwt.UserPrincipal;
+import com.spendora.backend.dto.ChangePasswordDTO;
+import com.spendora.backend.dto.DeleteAccountDTO;
+import com.spendora.backend.dto.UpdateProfileDTO;
 import com.spendora.backend.dto.UserDTO;
 import com.spendora.backend.service.impl.UserServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +24,7 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
-            return ResponseEntity.status(401).body("Not authenticated");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
         }
         
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
@@ -28,7 +33,55 @@ public class UserController {
         return userDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-    
-    // REMOVED: Security risk - users should only access their own data via /me endpoint
-    // If you need user lookup by ID, add @PreAuthorize("hasRole('ADMIN')") annotation
+
+    @PutMapping("/change-password")
+    public ResponseEntity<?> changePassword(
+            @Valid @RequestBody ChangePasswordDTO changePasswordDTO,
+            Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+
+        try {
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            userService.changePassword(userPrincipal.getId(), changePasswordDTO);
+            return ResponseEntity.ok("Password changed successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/update-profile")
+    public ResponseEntity<?> updateProfile(
+            @Valid @RequestBody UpdateProfileDTO updateProfileDTO,
+            Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+
+        try {
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            UserDTO updatedUser = userService.updateProfile(userPrincipal.getId(), updateProfileDTO);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/delete-account")
+    public ResponseEntity<?> deleteAccount(
+            @Valid @RequestBody DeleteAccountDTO deleteAccountDTO,
+            Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+
+        try {
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            userService.deleteAccount(userPrincipal.getId(), deleteAccountDTO.getPassword());
+            return ResponseEntity.ok("Account deleted successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }

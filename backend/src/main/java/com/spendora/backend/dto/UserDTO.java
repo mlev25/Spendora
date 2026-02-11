@@ -24,6 +24,7 @@ public class UserDTO {
     @NotBlank(message = "The given name must not be blank")
     private String name;
 
+    private String email;
     private List<String> roles;
     private Date lastLoginDate;
 }

@@ -68,6 +68,29 @@ export const expenseService = {
   },
 };
 
+// User service (profile management)
+export const userService = {
+  // Jelszó változtatás
+  async changePassword(passwordData) {
+    const response = await apiClient.put('/users/change-password', passwordData);
+    return response.data;
+  },
+
+  // Profil frissítése
+  async updateProfile(profileData) {
+    const response = await apiClient.put('/users/update-profile', profileData);
+    return response.data;
+  },
+
+  // Fiók törlése
+  async deleteAccount(password) {
+    const response = await apiClient.delete('/users/delete-account', {
+      data: { password }, // DELETE request body
+    });
+    return response.data;
+  },
+};
+
 // Token beállítása minden requesthez
 export const setAuthToken = (token) => {
   if (token) {

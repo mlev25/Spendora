@@ -18,7 +18,9 @@
 
         <!-- Ha be van jelentkezve -->
         <template v-else>
-          <span class="user-greeting">{{ $t('header.welcome') }}, {{ userName }}!</span>
+          <router-link to="/home" class="nav-link">{{ $t('header.home') }}</router-link>
+          <router-link to="/profile" class="nav-link">{{ $t('header.profile') }}</router-link>
+          
           <button @click="handleLogout" class="logout-btn">{{ $t('header.logout') }}</button>
         </template>
 

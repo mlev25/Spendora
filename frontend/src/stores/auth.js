@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import { setAuthToken } from '../services/api.js';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -25,10 +25,8 @@ export const useAuthStore = defineStore('auth', {
     setToken(token) {
       this.token = token;
       localStorage.setItem('token', token);
-      // Axios default header beállítása
-      if (token) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      }
+      // Axios header beállítása az apiClient instance-re
+      setAuthToken(token);
     },
 
     logout() {
@@ -37,7 +35,7 @@ export const useAuthStore = defineStore('auth', {
       this.isAuthenticated = false;
       localStorage.removeItem('user');
       localStorage.removeItem('token');
-      delete axios.defaults.headers.common['Authorization'];
+      setAuthToken(null);
     },
 
     // Állapot helyreállítása localStorage-ból
@@ -49,7 +47,7 @@ export const useAuthStore = defineStore('auth', {
         this.token = token;
         this.user = JSON.parse(user);
         this.isAuthenticated = true;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        setAuthToken(token);
       }
     },
   },

@@ -4,7 +4,9 @@
         "login": "Bejelentkezés",
         "register": "Regisztráció",
         "welcome": "Üdv",
-        "logout": "Kijelentkezés"
+        "logout": "Kijelentkezés",
+        "home": "Főoldal",
+        "profile": "Profil"
     },
     "footer":{
         "contact": "Kapcsolat",
@@ -240,5 +242,36 @@
         "save": "Mentés",
         "saving": "Mentés...",
         "loading": "Betöltés"
+    },
+    "profile": {
+        "title": "Profilom",
+        "accountInfo": "Fiók információk",
+        "name": "Név",
+        "username": "Felhasználónév",
+        "email": "Email cím",
+        "emailHint": "Az email cím nem módosítható",
+        "updateButton": "Profil frissítése",
+        "updateSuccess": "Profil sikeresen frissítve!",
+        "updateError": "Hiba történt a profil frissítése során!",
+        "usernameChangedLogout": "Felhasználónév megváltozott! Biztonsági okokból újra be kell jelentkezned.",
+        "changePassword": "Jelszó módosítása",
+        "currentPassword": "Jelenlegi jelszó",
+        "newPassword": "Új jelszó",
+        "confirmPassword": "Jelszó megerősítése",
+        "changePasswordButton": "Jelszó módosítása",
+        "passwordMismatch": "A két jelszó nem egyezik!",
+        "passwordChangeSuccess": "Jelszó sikeresen megváltoztatva!",
+        "passwordChangeError": "Hiba történt a jelszó módosítása során!",
+        "dangerZone": "Veszélyes zóna",
+        "deleteWarning": "A fiók törlése véglegese és visszafordíthatatlan. Minden adat eltűnik!",
+        "deleteAccountButton": "Fiók törlése",
+        "confirmDelete": "Biztosan törlöd a fiókodat?",
+        "deleteMessage": "Ez a művelet nem visszavonható. Minden kiadásod és adatod véglegesen törlődik.",
+        "enterPassword": "Add meg a jelszavad a megerősítéshez",
+        "passwordPlaceholder": "Jelszó",
+        "confirmDeleteButton": "Igen, törlöm a fiókomat",
+        "deleting": "Törlés...",
+        "passwordRequired": "A jelszó megadása kötelező!",
+        "deleteError": "Hiba történt a fiók törlése során!"
     }
 }

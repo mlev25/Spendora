@@ -4,7 +4,9 @@
         "login": "Login now",
         "register": "Register",
         "welcome": "Welcome",
-        "logout": "Logout"
+        "logout": "Logout",
+        "home": "Home",
+        "profile": "Profile"
     },
     "footer": {
         "contact": "Contact",
@@ -239,5 +241,36 @@
         "save": "Save",
         "saving": "Saving...",
         "loading": "Loading"
+    },
+    "profile": {
+        "title": "My Profile",
+        "accountInfo": "Account Information",
+        "name": "Name",
+        "username": "Username",
+        "email": "Email",
+        "emailHint": "Email cannot be changed",
+        "updateButton": "Update Profile",
+        "updateSuccess": "Profile updated successfully!",
+        "updateError": "Error occurred while updating profile!",
+        "usernameChangedLogout": "Username changed! For security reasons, you need to log in again.",
+        "changePassword": "Change Password",
+        "currentPassword": "Current Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "changePasswordButton": "Change Password",
+        "passwordMismatch": "Passwords do not match!",
+        "passwordChangeSuccess": "Password changed successfully!",
+        "passwordChangeError": "Error occurred while changing password!",
+        "dangerZone": "Danger Zone",
+        "deleteWarning": "Account deletion is permanent and irreversible. All data will be lost!",
+        "deleteAccountButton": "Delete Account",
+        "confirmDelete": "Are you sure you want to delete your account?",
+        "deleteMessage": "This action cannot be undone. All your expenses and data will be permanently deleted.",
+        "enterPassword": "Enter your password to confirm",
+        "passwordPlaceholder": "Password",
+        "confirmDeleteButton": "Yes, delete my account",
+        "deleting": "Deleting...",
+        "passwordRequired": "Password is required!",
+        "deleteError": "Error occurred while deleting account!"
     }
 }
