@@ -32,6 +32,42 @@ export const authService = {
   },
 };
 
+// Category service
+export const categoryService = {
+  // Összes kategória lekérése
+  async getAll() {
+    const response = await apiClient.get('/categories');
+    return response.data;
+  },
+};
+
+// Expense service
+export const expenseService = {
+  // Összes expense lekérése (saját)
+  async getAll() {
+    const response = await apiClient.get('/expenses');
+    return response.data;
+  },
+
+  // Expense létrehozása
+  async create(expenseData) {
+    const response = await apiClient.post('/expenses', expenseData);
+    return response.data;
+  },
+
+  // Expense frissítése
+  async update(id, expenseData) {
+    const response = await apiClient.put(`/expenses/${id}`, expenseData);
+    return response.data;
+  },
+
+  // Expense törlése
+  async delete(id) {
+    const response = await apiClient.delete(`/expenses/${id}`);
+    return response.data;
+  },
+};
+
 // Token beállítása minden requesthez
 export const setAuthToken = (token) => {
   if (token) {

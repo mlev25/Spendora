@@ -30,7 +30,7 @@ public class ExpenseDTO {
     @NotNull(message = "Date must not be null")
     private LocalDate date;
 
-    @NotNull
+    // userId is set by the controller from JWT token, not from request
     private Long userId;
 
     @NotNull(message = "Category ID must not be null")

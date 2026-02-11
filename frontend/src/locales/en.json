@@ -211,5 +211,33 @@
             "description": "If you have more questions, contact us!",
             "button": "Contact Us"
         }
+    },
+    "expense": {
+        "myExpenses": "My Expenses",
+        "addNew": "New expense",
+        "addFirst": "Add first expense",
+        "noExpenses": "You don't have any expenses yet",
+        "add": "Add New Expense",
+        "edit": "Edit Expense",
+        "name": "Name",
+        "namePlaceholder": "e.g. Grocery shopping",
+        "price": "Amount",
+        "category": "Category",
+        "selectCategory": "Select category",
+        "date": "Date",
+        "description": "Note",
+        "descriptionPlaceholder": "Optional note",
+        "actions": "Actions",
+        "unknown": "Unknown",
+        "deleteConfirm": "Are you sure you want to delete this expense: {name}?",
+        "saveError": "Error occurred while saving!",
+        "deleteError": "Error occurred while deleting!",
+        "categoryLoadError": "Failed to load categories!"
+    },
+    "common": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving...",
+        "loading": "Loading"
     }
 }

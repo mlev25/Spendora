@@ -1,23 +1,22 @@
 <template>
   <div class="home-container">
     <div class="welcome-section">
-      <h1 class="welcome-title">{{ $t('home.welcome') }}, {{ userName }}! 👋</h1>
+      <h1 class="welcome-title">{{ $t('home.welcome') }}, {{ userName }}!</h1>
       <p class="welcome-subtitle">{{ $t('home.subtitle') }}</p>
     </div>
 
     <div class="dashboard-grid">
       <!-- Statisztikák kártya -->
       <div class="dashboard-card stats-card">
-        <div class="card-icon">📊</div>
         <h3 class="card-title">{{ $t('home.stats.title') }}</h3>
         <p class="card-description">{{ $t('home.stats.description') }}</p>
         <div class="card-stats">
           <div class="stat-item">
-            <span class="stat-value">0</span>
+            <span class="stat-value">{{ expenses.length }}</span>
             <span class="stat-label">{{ $t('home.stats.totalExpenses') }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-value">0 Ft</span>
+            <span class="stat-value">{{ totalThisMonth }} Ft</span>
             <span class="stat-label">{{ $t('home.stats.thisMonth') }}</span>
           </div>
         </div>
@@ -25,23 +24,29 @@
 
       <!-- Új kiadás kártya -->
       <div class="dashboard-card action-card">
-        <div class="card-icon">💰</div>
         <h3 class="card-title">{{ $t('home.addExpense.title') }}</h3>
         <p class="card-description">{{ $t('home.addExpense.description') }}</p>
-        <button class="action-btn">{{ $t('home.addExpense.button') }}</button>
+        <button class="action-btn" @click="openAddModal">{{ $t('home.addExpense.button') }}</button>
       </div>
 
       <!-- Kategóriák kártya -->
       <div class="dashboard-card categories-card">
-        <div class="card-icon">🏷️</div>
         <h3 class="card-title">{{ $t('home.categories.title') }}</h3>
         <p class="card-description">{{ $t('home.categories.description') }}</p>
-        <button class="action-btn secondary">{{ $t('home.categories.button') }}</button>
+        <div class="category-list">
+          <span
+            v-for="category in categories"
+            :key="category.id"
+            class="category-badge"
+            :style="{ backgroundColor: category.color }"
+          >
+            {{ category.name }}
+          </span>
+        </div>
       </div>
 
       <!-- Chatbot kártya -->
       <div class="dashboard-card chatbot-card">
-        <div class="card-icon">🤖</div>
         <h3 class="card-title">{{ $t('home.chatbot.title') }}</h3>
         <p class="card-description">{{ $t('home.chatbot.description') }}</p>
         <button class="action-btn secondary">{{ $t('home.chatbot.button') }}</button>
@@ -59,14 +64,48 @@
         <p>{{ userRole }}</p>
       </div>
     </div>
+
+    <!-- Expense lista -->
+    <ExpenseList
+      :expenses="expenses"
+      :categories="categories"
+      :loading="loading"
+      @add="openAddModal"
+      @edit="openEditModal"
+      @delete="deleteExpense"
+    />
+
+    <!-- Add/Edit Modal -->
+    <AddExpenseModal
+      :isOpen="isModalOpen"
+      :expense="selectedExpense"
+      @close="closeModal"
+      @success="handleExpenseSuccess"
+    />
   </div>
 </template>
 
 <script>
 import { useAuthStore } from '../stores/auth.js';
+import { expenseService, categoryService } from '../services/api.js';
+import AddExpenseModal from '../components/AddExpenseModal.vue';
+import ExpenseList from '../components/ExpenseList.vue';
 
 export default {
   name: 'HomeView',
+  components: {
+    AddExpenseModal,
+    ExpenseList,
+  },
+  data() {
+    return {
+      expenses: [],
+      categories: [],
+      loading: false,
+      isModalOpen: false,
+      selectedExpense: null,
+    };
+  },
   computed: {
     userName() {
       const authStore = useAuthStore();
@@ -82,8 +121,69 @@ export default {
       
       const date = new Date(authStore.user.lastLoginDate);
       return date.toLocaleString(this.$i18n.locale);
-    }
-  }
+    },
+    totalThisMonth() {
+      const now = new Date();
+      const thisMonth = now.getMonth();
+      const thisYear = now.getFullYear();
+
+      const total = this.expenses
+        .filter((expense) => {
+          const expenseDate = new Date(expense.date);
+          return (
+            expenseDate.getMonth() === thisMonth &&
+            expenseDate.getFullYear() === thisYear
+          );
+        })
+        .reduce((sum, expense) => sum + parseFloat(expense.price), 0);
+
+      return new Intl.NumberFormat('hu-HU').format(total);
+    },
+  },
+  async mounted() {
+    await this.loadData();
+  },
+  methods: {
+    async loadData() {
+      this.loading = true;
+      try {
+        const [expensesData, categoriesData] = await Promise.all([
+          expenseService.getAll(),
+          categoryService.getAll(),
+        ]);
+        this.expenses = expensesData;
+        this.categories = categoriesData;
+      } catch (error) {
+        console.error('Failed to load data:', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    openAddModal() {
+      this.selectedExpense = null;
+      this.isModalOpen = true;
+    },
+    openEditModal(expense) {
+      this.selectedExpense = expense;
+      this.isModalOpen = true;
+    },
+    closeModal() {
+      this.isModalOpen = false;
+      this.selectedExpense = null;
+    },
+    async handleExpenseSuccess() {
+      await this.loadData();
+    },
+    async deleteExpense(expenseId) {
+      try {
+        await expenseService.delete(expenseId);
+        await this.loadData();
+      } catch (error) {
+        console.error('Failed to delete expense:', error);
+        alert(this.$t('expense.deleteError'));
+      }
+    },
+  },
 };
 </script>
 
@@ -116,22 +216,10 @@ export default {
   display: grid;
   gap: clamp(1rem, 2vw, 1.5rem);
   margin-bottom: 2rem;
-}
-
-/* Mobil: 1 oszlop */
-.dashboard-grid {
   grid-template-columns: 1fr;
 }
 
-/* Tablet: 2 oszlop */
 @media (min-width: 640px) {
-  .dashboard-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Desktop: 2 oszlop (nagyobb kártyák) */
-@media (min-width: 1024px) {
   .dashboard-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -151,11 +239,6 @@ export default {
 .dashboard-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.card-icon {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 0.5rem;
 }
 
 .card-title {
@@ -195,6 +278,21 @@ export default {
   font-size: clamp(0.8rem, 1.2vw, 0.9rem);
   color: var(--color-text);
   opacity: 0.7;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
 }
 
 .action-btn {
