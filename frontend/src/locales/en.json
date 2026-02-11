@@ -235,7 +235,9 @@
         "deleteConfirm": "Are you sure you want to delete this expense: {name}?",
         "saveError": "Error occurred while saving!",
         "deleteError": "Error occurred while deleting!",
-        "categoryLoadError": "Failed to load categories!"
+        "categoryLoadError": "Failed to load categories!",
+        "aiPrediction": "AI Categorization",
+        "aiHint": "Artificial intelligence will automatically select the most suitable category"
     },
     "common": {
         "cancel": "Cancel",

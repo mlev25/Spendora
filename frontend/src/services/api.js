@@ -66,6 +66,16 @@ export const expenseService = {
     const response = await apiClient.delete(`/expenses/${id}`);
     return response.data;
   },
+
+  // AI kategória predikció
+  async predictCategory(expenseData) {
+    const response = await apiClient.post('/expenses/predict-category', {
+      name: expenseData.name,
+      price: expenseData.price,
+      description: expenseData.description
+    });
+    return response.data;
+  },
 };
 
 // User service (profile management)

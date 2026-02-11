@@ -236,7 +236,9 @@
         "deleteConfirm": "Biztosan törölni szeretnéd ezt a kiadást: {name}?",
         "saveError": "Hiba történt a mentés során!",
         "deleteError": "Hiba történt a törlés során!",
-        "categoryLoadError": "Nem sikerült betölteni a kategóriákat!"
+        "categoryLoadError": "Nem sikerült betölteni a kategóriákat!",
+        "aiPrediction": "AI kategórizálás",
+        "aiHint": "A mesterséges intelligencia automatikusan kiválasztja a legmegfelelőbb kategóriát"
     },
     "common": {
         "cancel": "Mégse",

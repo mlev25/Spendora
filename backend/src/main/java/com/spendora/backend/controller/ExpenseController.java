@@ -2,6 +2,8 @@ package com.spendora.backend.controller;
 
 import com.spendora.backend.config.jwt.UserPrincipal;
 import com.spendora.backend.dto.ExpenseDTO;
+import com.spendora.backend.dto.PredictCategoryRequest;
+import com.spendora.backend.service.GeminiService;
 import com.spendora.backend.service.impl.ExpenseServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -18,6 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ExpenseController {
     private final ExpenseServiceImpl expenseService;
+    private final GeminiService geminiService;
 
     @PostMapping
     public ResponseEntity<?> addNewExpense(@Valid @RequestBody ExpenseDTO expenseDTO, Authentication authentication){
@@ -116,6 +121,25 @@ public class ExpenseController {
             return ResponseEntity.ok("Expense deleted successfully");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/predict-category")
+    public ResponseEntity<?> predictCategory(@Valid @RequestBody PredictCategoryRequest request, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        
+        try {
+            String predictedCategory = geminiService.predictCategory(request);
+            
+            Map<String, String> response = new HashMap<>();
+            response.put("categoryName", predictedCategory);
+            
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error predicting category: " + e.getMessage());
         }
     }
 }

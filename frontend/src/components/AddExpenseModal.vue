@@ -51,6 +51,22 @@
           </select>
         </div>
 
+        <!-- AI kategorizálás checkbox (csak új kiadásnál) -->
+        <div v-if="!editMode" class="form-group ai-checkbox-group">
+          <label class="ai-checkbox-label">
+            <input
+              type="checkbox"
+              v-model="useAiPrediction"
+              @change="handleAiToggle"
+              :disabled="!formData.name || aiPredicting"
+            />
+            <span class="ai-icon">🤖</span>
+            {{ $t('expense.aiPrediction') }}
+            <span v-if="aiPredicting" class="ai-loading">⏳</span>
+          </label>
+          <p class="ai-hint">{{ $t('expense.aiHint') }}</p>
+        </div>
+
         <div class="form-group">
           <label for="date">{{ $t('expense.date') }} *</label>
           <input
@@ -117,6 +133,8 @@ export default {
       categories: [],
       isSubmitting: false,
       errorMessage: '',
+      useAiPrediction: false,
+      aiPredicting: false,
     };
   },
   computed: {
@@ -192,6 +210,40 @@ export default {
         description: '',
       };
       this.errorMessage = '';
+      this.useAiPrediction = false;
+      this.aiPredicting = false;
+    },
+    async handleAiToggle() {
+      if (this.useAiPrediction && this.formData.name) {
+        await this.predictCategoryWithAi();
+      }
+    },
+    async predictCategoryWithAi() {
+      this.aiPredicting = true;
+      this.errorMessage = '';
+
+      try {
+        const response = await expenseService.predictCategory({
+          name: this.formData.name,
+          price: this.formData.price ? parseFloat(this.formData.price) : null,
+          description: this.formData.description,
+        });
+
+        // Megkeressük a kategóriát név alapján
+        const predictedCategory = this.categories.find(
+          (cat) => cat.name === response.categoryName
+        );
+
+        if (predictedCategory) {
+          this.formData.categoryId = predictedCategory.id;
+        }
+      } catch (error) {
+        console.error('AI prediction failed:', error);
+        this.useAiPrediction = false;
+        // Nem dobunk errort, mert az AI opcionális funkció
+      } finally {
+        this.aiPredicting = false;
+      }
     },
   },
 };
@@ -318,6 +370,61 @@ textarea.form-control {
   justify-content: flex-end;
   margin-top: 1.5rem;
 }
+
+.ai-checkbox-group {
+  background-color: rgba(0, 123, 255, 0.05);
+  border: 1px dashed rgba(0, 123, 255, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.ai-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.ai-checkbox-label input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.ai-checkbox-label input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.ai-icon {
+  font-size: 1.2rem;
+}
+
+.ai-loading {
+  font-size: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ai-hint {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  opacity: 0.7;
+  margin: 0.5rem 0 0 0;
+}
+
 
 .btn-primary,
 .btn-secondary {
