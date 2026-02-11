@@ -53,6 +53,11 @@ export default {
     transition: color 0.3s;
 }
 
+.footer-link:hover {
+    color: var(--color-primary);
+    font-weight: bolder;
+}
+
 .copyright {
     font-size: 0.9rem;
     color: var(--color-text);

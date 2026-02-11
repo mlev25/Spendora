@@ -185,6 +185,10 @@ export default {
 
 .expense-table-wrapper {
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: 250px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
 }
 
 .expense-table {
@@ -194,6 +198,9 @@ export default {
 
 .expense-table thead {
   background-color: var(--color-background);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .expense-table th {
@@ -203,6 +210,7 @@ export default {
   color: var(--color-text);
   border-bottom: 2px solid var(--color-border);
   font-size: 0.9rem;
+  background-color: var(--color-background);
 }
 
 .expense-table td {
@@ -211,8 +219,13 @@ export default {
   color: var(--color-text);
 }
 
+.expense-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
 .expense-table tbody tr:hover {
-  background-color: var(--color-background);
+  background-color: rgba(0, 123, 255, 0.08);
+  cursor: pointer;
 }
 
 .expense-name {
