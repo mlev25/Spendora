@@ -101,6 +101,42 @@ export const userService = {
   },
 };
 
+// Statistics service
+export const statisticsService = {
+  // Havi statisztikák (kategória bontással)
+  async getMonthly(year, month) {
+    const response = await apiClient.get('/statistics/monthly', {
+      params: { year, month }
+    });
+    return response.data;
+  },
+
+  // Éves statisztikák (12 hónapos bontással)
+  async getYearly(year) {
+    const response = await apiClient.get('/statistics/yearly', {
+      params: { year }
+    });
+    return response.data;
+  },
+
+  // Kategória részletezés (időszakra)
+  async getCategorySpending(startDate, endDate) {
+    const response = await apiClient.get('/statistics/categories', {
+      params: { 
+        startDate: startDate.toISOString().split('T')[0], // YYYY-MM-DD
+        endDate: endDate.toISOString().split('T')[0] 
+      }
+    });
+    return response.data;
+  },
+
+  // Gyors KPI összegzés
+  async getSummary() {
+    const response = await apiClient.get('/statistics/summary');
+    return response.data;
+  },
+};
+
 // Token beállítása minden requesthez
 export const setAuthToken = (token) => {
   if (token) {

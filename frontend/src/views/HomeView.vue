@@ -7,7 +7,7 @@
 
     <div class="dashboard-grid">
       <!-- Statisztikák kártya -->
-      <div class="dashboard-card stats-card">
+      <div class="dashboard-card stats-card" @click="goToStatistics">
         <h3 class="card-title">{{ $t('home.stats.title') }}</h3>
         <p class="card-description">{{ $t('home.stats.description') }}</p>
         <div class="card-stats">
@@ -184,6 +184,9 @@ export default {
         alert(this.$t('expense.deleteError'));
       }
     },
+    goToStatistics() {
+      this.$router.push('/statistics');
+    },
   },
 };
 </script>
@@ -240,6 +243,10 @@ export default {
 .dashboard-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card {
+  cursor: pointer;
 }
 
 .card-title {
