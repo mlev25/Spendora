@@ -60,11 +60,11 @@
               @change="handleAiToggle"
               :disabled="!formData.name || aiPredicting"
             />
-            <span class="ai-icon">🤖</span>
             {{ $t('expense.aiPrediction') }}
-            <span v-if="aiPredicting" class="ai-loading">⏳</span>
+            <span v-if="aiPredicting" class="ai-loading">{{ $t('expense.aiLoading') }}</span>
           </label>
-          <p class="ai-hint">{{ $t('expense.aiHint') }}</p>
+          <p v-if="aiPredictedMessage" class="ai-success">{{ aiPredictedMessage }}</p>
+          <p v-else class="ai-hint">{{ $t('expense.aiHint') }}</p>
         </div>
 
         <div class="form-group">
@@ -135,6 +135,7 @@ export default {
       errorMessage: '',
       useAiPrediction: false,
       aiPredicting: false,
+      aiPredictedMessage: '',
     };
   },
   computed: {
@@ -157,6 +158,13 @@ export default {
         } else {
           this.resetForm();
         }
+      }
+    },
+    'formData.categoryId'(newVal, oldVal) {
+      // Ha a user manuálisan változtatja a kategóriát, és nem az AI állította be
+      if (newVal && !this.aiPredicting && this.useAiPrediction) {
+        this.useAiPrediction = false;
+        this.aiPredictedMessage = '';
       }
     },
   },
@@ -212,6 +220,7 @@ export default {
       this.errorMessage = '';
       this.useAiPrediction = false;
       this.aiPredicting = false;
+      this.aiPredictedMessage = '';
     },
     async handleAiToggle() {
       if (this.useAiPrediction && this.formData.name) {
@@ -221,6 +230,7 @@ export default {
     async predictCategoryWithAi() {
       this.aiPredicting = true;
       this.errorMessage = '';
+      this.aiPredictedMessage = '';
 
       try {
         const response = await expenseService.predictCategory({
@@ -236,6 +246,12 @@ export default {
 
         if (predictedCategory) {
           this.formData.categoryId = predictedCategory.id;
+          this.aiPredictedMessage = this.$t('expense.aiPredicted', { category: predictedCategory.name });
+          
+          // Üzenet eltüntetése 5 másodperc után
+          setTimeout(() => {
+            this.aiPredictedMessage = '';
+          }, 5000);
         }
       } catch (error) {
         console.error('AI prediction failed:', error);
@@ -400,22 +416,11 @@ textarea.form-control {
   opacity: 0.5;
 }
 
-.ai-icon {
-  font-size: 1.2rem;
-}
-
 .ai-loading {
-  font-size: 1rem;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-left: 0.5rem;
 }
 
 .ai-hint {
@@ -423,6 +428,16 @@ textarea.form-control {
   color: var(--color-text);
   opacity: 0.7;
   margin: 0.5rem 0 0 0;
+}
+
+.ai-success {
+  font-size: 0.85rem;
+  color: #28a745;
+  font-weight: 600;
+  margin: 0.5rem 0 0 0;
+  padding: 0.5rem;
+  background-color: rgba(40, 167, 69, 0.1);
+  border-radius: 4px;
 }
 
 

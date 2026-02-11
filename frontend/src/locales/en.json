@@ -237,7 +237,9 @@
         "deleteError": "Error occurred while deleting!",
         "categoryLoadError": "Failed to load categories!",
         "aiPrediction": "AI Categorization",
-        "aiHint": "Artificial intelligence will automatically select the most suitable category"
+        "aiHint": "Artificial intelligence will automatically select the most suitable category",
+        "aiLoading": "Analyzing...",
+        "aiPredicted": "AI suggestion: {category}"
     },
     "common": {
         "cancel": "Cancel",

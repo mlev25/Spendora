@@ -43,39 +43,25 @@ export default {
 
 .footer-nav {
     display: flex;
-    gap: 15px;
+    gap: 28px;
 }
 
 .footer-link {
+    flex-shrink: 0;
     color: var(--color-text);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.2s;
+    display: inline-block;
 }
 
 .footer-link:hover {
     color: var(--color-primary);
-    font-weight: bolder;
+    transform: translateY(-2px);
 }
 
 .copyright {
     font-size: 0.9rem;
     color: var(--color-text);
 }
-
-
-.footer-nav {
-    display: flex;
-    gap: 28px; /* Növeltük a távolságot a linkek között */
-}
-
-.footer-link {
-    /* A flex-shrink: 0 megakadályozza, hogy a linkek összemenjenek a rövid szöveg hatására */
-    flex-shrink: 0;
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-/* ... a korábban megadott AppFooter.vue (most már app-footer) stílusok kerülnek ide ... */
 </style>

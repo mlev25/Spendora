@@ -18,16 +18,16 @@
         "title": "Pénzügyeid, egyszerűen átláthatóan.",
         "subtitle": "A Spendora segít nyomon követni a kiadásaidat, és mutatja, hol spórolhatsz.",
         "card-left":{
-            "title": "💵 Költségkövetés",
+            "title": "Költségkövetés",
             "text": "Vidd fel kiadásaidat másodpercek alatt, akár automatikusan kategorizálva."
         },
         "card-center":{
-            "title": "🚀 Kezdjük el!",
+            "title": "Kezdjük el!",
             "text": "Ne várj tovább, regisztrálj és tedd átláthatóvá pénzügyeidet.",
             "button": "Regisztrálok Most!"
         },
         "card-right":{
-            "title": "📊 Statisztikák",
+            "title": "Statisztikák",
             "text": "Légy tudatos: nézd meg a kiadásaidat gyönyörű diagramokon, és kérj tanácsot a személyreszabott chatbotunktól."
         }
     },
@@ -238,7 +238,9 @@
         "deleteError": "Hiba történt a törlés során!",
         "categoryLoadError": "Nem sikerült betölteni a kategóriákat!",
         "aiPrediction": "AI kategórizálás",
-        "aiHint": "A mesterséges intelligencia automatikusan kiválasztja a legmegfelelőbb kategóriát"
+        "aiHint": "Automatikusan kiválasztja a legmegfelelőbb kategóriát",
+        "aiLoading": "Elemzés...",
+        "aiPredicted": "AI javaslat: {category}"
     },
     "common": {
         "cancel": "Mégse",
