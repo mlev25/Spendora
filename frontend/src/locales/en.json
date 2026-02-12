@@ -339,5 +339,14 @@
         "deleting": "Deleting...",
         "passwordRequired": "Password is required!",
         "deleteError": "Error occurred while deleting account!"
+    },
+    "chat": {
+        "title": "Financial Assistant",
+        "openChat": "Open chat",
+        "close": "Close",
+        "welcomeMessage": "Hi! 👋 I'm your financial advisor assistant. How can I help you today?",
+        "inputPlaceholder": "Type a message...",
+        "send": "Send",
+        "errorMessage": "Sorry, an error occurred. Please try again later!"
     }
 }

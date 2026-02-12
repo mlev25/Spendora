@@ -49,7 +49,7 @@
       <div class="dashboard-card chatbot-card">
         <h3 class="card-title">{{ $t('home.chatbot.title') }}</h3>
         <p class="card-description">{{ $t('home.chatbot.description') }}</p>
-        <button class="action-btn secondary">{{ $t('home.chatbot.button') }}</button>
+        <button @click="openChat" class="action-btn secondary">{{ $t('home.chatbot.button') }}</button>
       </div>
     </div>
 
@@ -90,12 +90,19 @@ import { useAuthStore } from '../stores/auth.js';
 import { expenseService, categoryService } from '../services/api.js';
 import AddExpenseModal from '../components/AddExpenseModal.vue';
 import ExpenseList from '../components/ExpenseList.vue';
+import { inject } from 'vue';
 
 export default {
   name: 'HomeView',
   components: {
     AddExpenseModal,
     ExpenseList,
+  },
+  setup() {
+    const openChatFunc = inject('openChat');
+    return {
+      openChatFunc
+    };
   },
   data() {
     return {
@@ -186,6 +193,12 @@ export default {
     },
     goToStatistics() {
       this.$router.push('/statistics');
+    },
+    openChat() {
+      // Chat widget megnyitása az inject-elt függvénnyel
+      if (this.openChatFunc) {
+        this.openChatFunc();
+      }
     },
   },
 };

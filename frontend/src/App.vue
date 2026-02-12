@@ -5,17 +5,47 @@
       <router-view />
     </main>
     <LandingFooter />
+    
+    <!-- Chat Widget (csak ha be van jelentkezve) -->
+    <ChatWidget v-if="isAuthenticated" ref="chatWidget" />
   </div>
 </template>
 
 <script>
 import LandingHeader from './components/LandingHeader.vue';
 import LandingFooter from './components/LandingFooter.vue';
+import ChatWidget from './components/ChatWidget.vue';
+import { useAuthStore } from './stores/auth';
+import { computed, ref, provide } from 'vue';
 
 export default {
   components: {
     LandingHeader,
-    LandingFooter
+    LandingFooter,
+    ChatWidget
+  },
+  setup() {
+    const authStore = useAuthStore();
+    const isAuthenticated = computed(() => authStore.isAuthenticated);
+    const chatWidget = ref(null);
+    
+    // Provide openChat function to all child components
+    const openChat = () => {
+      if (chatWidget.value) {
+        chatWidget.value.openChat();
+      }
+    };
+    
+    provide('openChat', openChat);
+    
+    // Debug log
+    console.log('Auth Store:', authStore);
+    console.log('Is Authenticated:', isAuthenticated.value);
+    
+    return {
+      isAuthenticated,
+      chatWidget
+    };
   }
 }
 </script>

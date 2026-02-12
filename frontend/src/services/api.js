@@ -156,6 +156,17 @@ export const statisticsService = {
   },
 };
 
+// Chat service
+export const chatService = {
+  // AI chatbot kérdés
+  async ask(messages) {
+    const response = await apiClient.post('/chat/ask', {
+      messages: messages
+    });
+    return response.data.response;
+  },
+};
+
 // Token minden requesthez
 export const setAuthToken = (token) => {
   if (token) {
