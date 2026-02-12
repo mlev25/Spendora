@@ -21,10 +21,10 @@ body {
 /* Globális CSS változók a színsémához */
 :root {
     /* Világos mód alapértékek */
-    --color-background: #60dfe693;
+    --color-background: #5acfd593;
     --color-text: #2e2605;
     --color-primary: #007bff;
-    --color-card-bg: #b6edff;
+    --color-card-bg: #aceaf1;
     --color-border: #82c2c1;
     
     /* Betűtípus */
