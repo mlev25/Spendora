@@ -2,14 +2,44 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api';
 
-// Axios instance létrehozása
 const apiClient = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true, // CAPTCHA session cookie-hoz
+  withCredentials: true,
 });
+
+let isRedirecting = false;
+
+apiClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      const token = localStorage.getItem('token');
+      const currentPath = window.location.pathname;
+      if (token && !isRedirecting && currentPath !== '/login') {
+        isRedirecting = true;
+
+        console.log('Token lejárt - tisztítás és átirányítás...');
+
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        delete apiClient.defaults.headers.common['Authorization'];
+
+        setTimeout(() => {
+          alert('A munkamenet lejárt!\n\nKérjük, jelentkezz be újra.');
+          window.location.href = '/login';
+          isRedirecting = false;
+        }, 100);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 // Auth service
 export const authService = {
@@ -25,16 +55,15 @@ export const authService = {
     return response.data;
   },
 
-  // CAPTCHA kép lekérése
+  // CAPTCHA
   async getCaptcha() {
     const response = await apiClient.get('/auth/captcha');
-    return response.data; // Base64 enkódolt kép
+    return response.data; // Base64
   },
 };
 
 // Category service
 export const categoryService = {
-  // Összes kategória lekérése
   async getAll() {
     const response = await apiClient.get('/categories');
     return response.data;
@@ -43,31 +72,27 @@ export const categoryService = {
 
 // Expense service
 export const expenseService = {
-  // Összes expense lekérése (saját)
   async getAll() {
     const response = await apiClient.get('/expenses');
     return response.data;
   },
 
-  // Expense létrehozása
   async create(expenseData) {
     const response = await apiClient.post('/expenses', expenseData);
     return response.data;
   },
 
-  // Expense frissítése
   async update(id, expenseData) {
     const response = await apiClient.put(`/expenses/${id}`, expenseData);
     return response.data;
   },
 
-  // Expense törlése
   async delete(id) {
     const response = await apiClient.delete(`/expenses/${id}`);
     return response.data;
   },
 
-  // AI kategória predikció
+  // AI predikcio
   async predictCategory(expenseData) {
     const response = await apiClient.post('/expenses/predict-category', {
       name: expenseData.name,
@@ -78,24 +103,21 @@ export const expenseService = {
   },
 };
 
-// User service (profile management)
+// User service
 export const userService = {
-  // Jelszó változtatás
   async changePassword(passwordData) {
     const response = await apiClient.put('/users/change-password', passwordData);
     return response.data;
   },
 
-  // Profil frissítése
   async updateProfile(profileData) {
     const response = await apiClient.put('/users/update-profile', profileData);
     return response.data;
   },
 
-  // Fiók törlése
   async deleteAccount(password) {
     const response = await apiClient.delete('/users/delete-account', {
-      data: { password }, // DELETE request body
+      data: { password },
     });
     return response.data;
   },
@@ -103,7 +125,7 @@ export const userService = {
 
 // Statistics service
 export const statisticsService = {
-  // Havi statisztikák (kategória bontással)
+
   async getMonthly(year, month) {
     const response = await apiClient.get('/statistics/monthly', {
       params: { year, month }
@@ -111,7 +133,6 @@ export const statisticsService = {
     return response.data;
   },
 
-  // Éves statisztikák (12 hónapos bontással)
   async getYearly(year) {
     const response = await apiClient.get('/statistics/yearly', {
       params: { year }
@@ -119,7 +140,6 @@ export const statisticsService = {
     return response.data;
   },
 
-  // Kategória részletezés (időszakra)
   async getCategorySpending(startDate, endDate) {
     const response = await apiClient.get('/statistics/categories', {
       params: { 
@@ -130,14 +150,13 @@ export const statisticsService = {
     return response.data;
   },
 
-  // Gyors KPI összegzés
   async getSummary() {
     const response = await apiClient.get('/statistics/summary');
     return response.data;
   },
 };
 
-// Token beállítása minden requesthez
+// Token minden requesthez
 export const setAuthToken = (token) => {
   if (token) {
     apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;

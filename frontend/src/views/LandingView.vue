@@ -40,6 +40,7 @@ export default {
     padding: 3rem 1rem;
     background-color: var(--color-background);
     min-height: 70vh;
+    border-radius: 1.5rem;
 }
 
 .main-title {
@@ -77,7 +78,7 @@ export default {
 
 .info-card, .cta-card {
     width: 100%;
-    max-width: clamp(300px, 80vw, 600px);
+    max-width: clamp(230px, 80vw, 600px);
 }
 
 /* Desktop: 3 oszlop */

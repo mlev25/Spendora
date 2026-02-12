@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    name: 'LandingFooter' // Fontos a név!
+    name: 'LandingFooter'
 }
 </script>
 
@@ -63,5 +63,23 @@ export default {
 .copyright {
     font-size: 0.9rem;
     color: var(--color-text);
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .copyright {
+        text-align: center;
+    }
 }
 </style>

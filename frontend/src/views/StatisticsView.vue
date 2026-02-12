@@ -36,42 +36,108 @@
     </div>
 
     <!-- KPI Summary Cards -->
-    <div v-if="summary" class="row g-3 mb-4">
-      <div class="col-md-3">
-        <div class="card kpi-card">
-          <div class="card-body">
-            <h6 class="text-muted">{{ $t('statistics.totalExpenses') }}</h6>
-            <h3 class="mb-0">{{ formatCurrency(summary.totalExpenses) }}</h3>
-            <small class="text-muted">{{ summary.expenseCount }} {{ $t('statistics.items') }}</small>
+    <div v-if="summary" class="kpi-section mb-4">
+      <!-- Mobile Carousel -->
+      <div class="kpi-carousel-mobile">
+        <button @click="prevKpi" class="carousel-nav-btn prev-btn" :disabled="currentKpiIndex === 0">
+          <span>‹</span>
+        </button>
+        
+        <div class="kpi-carousel-wrapper">
+          <div class="kpi-carousel-track" :style="{ transform: `translateX(-${currentKpiIndex * 100}%)` }">
+            <div class="kpi-carousel-item">
+              <div class="card kpi-card">
+                <div class="card-body">
+                  <h6 class="text-muted">{{ $t('statistics.totalExpenses') }}</h6>
+                  <h3 class="mb-0">{{ formatCurrency(summary.totalExpenses) }}</h3>
+                  <small class="text-muted">{{ summary.expenseCount }} {{ $t('statistics.items') }}</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-carousel-item">
+              <div class="card kpi-card">
+                <div class="card-body">
+                  <h6 class="text-muted">{{ $t('statistics.averageExpense') }}</h6>
+                  <h3 class="mb-0">{{ formatCurrency(summary.averageExpense) }}</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-carousel-item">
+              <div class="card kpi-card">
+                <div class="card-body">
+                  <h6 class="text-muted">{{ $t('statistics.thisMonth') }}</h6>
+                  <h3 class="mb-0">{{ formatCurrency(summary.thisMonthTotal) }}</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="kpi-carousel-item">
+              <div class="card kpi-card">
+                <div class="card-body">
+                  <h6 class="text-muted">{{ $t('statistics.thisYear') }}</h6>
+                  <h3 class="mb-0">{{ formatCurrency(summary.thisYearTotal) }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button @click="nextKpi" class="carousel-nav-btn next-btn" :disabled="currentKpiIndex === 3">
+          <span>›</span>
+        </button>
+      </div>
+
+      <!-- Desktop Grid -->
+      <div class="kpi-grid-desktop row g-3">
+        <div class="col-md-3">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <h6 class="text-muted">{{ $t('statistics.totalExpenses') }}</h6>
+              <h3 class="mb-0">{{ formatCurrency(summary.totalExpenses) }}</h3>
+              <small class="text-muted">{{ summary.expenseCount }} {{ $t('statistics.items') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <h6 class="text-muted">{{ $t('statistics.averageExpense') }}</h6>
+              <h3 class="mb-0">{{ formatCurrency(summary.averageExpense) }}</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <h6 class="text-muted">{{ $t('statistics.thisMonth') }}</h6>
+              <h3 class="mb-0">{{ formatCurrency(summary.thisMonthTotal) }}</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card kpi-card">
+            <div class="card-body">
+              <h6 class="text-muted">{{ $t('statistics.thisYear') }}</h6>
+              <h3 class="mb-0">{{ formatCurrency(summary.thisYearTotal) }}</h3>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="card kpi-card">
-          <div class="card-body">
-            <h6 class="text-muted">{{ $t('statistics.averageExpense') }}</h6>
-            <h3 class="mb-0">{{ formatCurrency(summary.averageExpense) }}</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card kpi-card">
-          <div class="card-body">
-            <h6 class="text-muted">{{ $t('statistics.thisMonth') }}</h6>
-            <h3 class="mb-0">{{ formatCurrency(summary.thisMonthTotal) }}</h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card kpi-card">
-          <div class="card-body">
-            <h6 class="text-muted">{{ $t('statistics.thisYear') }}</h6>
-            <h3 class="mb-0">{{ formatCurrency(summary.thisYearTotal) }}</h3>
-          </div>
-        </div>
+      <!-- Carousel Indicators -->
+      <div class="carousel-indicators-mobile">
+        <span 
+          v-for="i in 4" 
+          :key="i" 
+          class="indicator-dot"
+          :class="{ active: currentKpiIndex === i - 1 }"
+          @click="currentKpiIndex = i - 1"
+        ></span>
       </div>
     </div>
 
@@ -254,10 +320,10 @@
 
 <script>
 import { Pie, Bar, Line } from 'vue-chartjs';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement } from 'chart.js';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Filler } from 'chart.js';
 import { statisticsService, expenseService } from '@/services/api';
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement);
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Filler);
 
 export default {
   name: 'StatisticsView',
@@ -268,6 +334,7 @@ export default {
   },
   data() {
     return {
+      currentKpiIndex: 0,
       loading: false,
       selectedPeriod: 'month',
       selectedMonth: '',
@@ -323,7 +390,7 @@ export default {
       },
       barOptions: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: false,
@@ -352,9 +419,13 @@ export default {
             },
             ticks: {
               font: {
-                size: 11,
+                size: window.innerWidth <= 768 ? 10 : 11,
                 family: "'Inter', 'Segoe UI', sans-serif",
               },
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: window.innerWidth <= 768 ? 6 : 12,
             },
           },
           y: {
@@ -365,11 +436,24 @@ export default {
             },
             ticks: {
               font: {
-                size: 11,
+                size: window.innerWidth <= 768 ? 10 : 11,
                 family: "'Inter', 'Segoe UI', sans-serif",
               },
-              callback: (value) => this.formatCurrency(value),
+              callback: (value) => {
+                if (window.innerWidth <= 768) {
+                  return value >= 1000 ? (value / 1000).toFixed(0) + 'K' : value;
+                }
+                return this.formatCurrency(value);
+              },
             },
+          },
+        },
+        layout: {
+          padding: {
+            top: 10,
+            bottom: 5,
+            left: 5,
+            right: 5,
           },
         },
         borderRadius: 8,
@@ -377,7 +461,7 @@ export default {
       },
       lineOptions: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: false,
@@ -406,9 +490,13 @@ export default {
             },
             ticks: {
               font: {
-                size: 11,
+                size: window.innerWidth <= 768 ? 10 : 11,
                 family: "'Inter', 'Segoe UI', sans-serif",
               },
+              maxRotation: 0,
+              minRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: window.innerWidth <= 768 ? 8 : 15,
             },
           },
           y: {
@@ -419,22 +507,35 @@ export default {
             },
             ticks: {
               font: {
-                size: 11,
+                size: window.innerWidth <= 768 ? 10 : 11,
                 family: "'Inter', 'Segoe UI', sans-serif",
               },
-              callback: (value) => this.formatCurrency(value),
+              callback: (value) => {
+                if (window.innerWidth <= 768) {
+                  return value >= 1000 ? (value / 1000).toFixed(0) + 'K' : value;
+                }
+                return this.formatCurrency(value);
+              },
             },
+          },
+        },
+        layout: {
+          padding: {
+            top: 10,
+            bottom: 5,
+            left: 5,
+            right: 5,
           },
         },
         elements: {
           point: {
-            radius: 4,
-            hoverRadius: 6,
+            radius: window.innerWidth <= 768 ? 2 : 4,
+            hoverRadius: window.innerWidth <= 768 ? 4 : 6,
             backgroundColor: 'white',
             borderWidth: 2,
           },
           line: {
-            borderWidth: 3,
+            borderWidth: window.innerWidth <= 768 ? 2 : 3,
           },
         },
       },
@@ -520,6 +621,16 @@ export default {
     this.loadData();
   },
   methods: {
+    prevKpi() {
+      if (this.currentKpiIndex > 0) {
+        this.currentKpiIndex--;
+      }
+    },
+    nextKpi() {
+      if (this.currentKpiIndex < 3) {
+        this.currentKpiIndex++;
+      }
+    },
     initializeFilters() {
       const now = new Date();
       this.selectedMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
@@ -879,12 +990,15 @@ export default {
 
 .chart-wrapper {
   position: relative;
-  height: 280px;
+  height: 300px;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.chart-card:first-child .chart-wrapper {
-  height: 300px;
+.chart-wrapper canvas {
+  max-height: 100%;
 }
 
 /* Top Categories List */
@@ -1210,17 +1324,133 @@ export default {
   transition: width 0.6s ease;
 }
 
+/* KPI Carousel Styles */
+.kpi-section {
+  position: relative;
+}
+
+.kpi-carousel-mobile {
+  display: none;
+}
+
+.kpi-grid-desktop {
+  display: flex;
+}
+
+.kpi-carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.kpi-carousel-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.kpi-carousel-item {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-nav-btn:hover:not(:disabled) {
+  background: #007bff;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: #ccc;
+}
+
+.carousel-nav-btn span {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.prev-btn {
+  left: -15px;
+}
+
+.next-btn {
+  right: -15px;
+}
+
+.carousel-indicators-mobile {
+  display: none;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.indicator-dot.active {
+  background: #007bff;
+  width: 24px;
+  border-radius: 4px;
+}
+
 @media (max-width: 768px) {
   .statistics-container {
     padding: 1rem;
   }
   
+  .kpi-carousel-mobile {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 30px;
+  }
+
+  .kpi-grid-desktop {
+    display: none;
+  }
+
+  .carousel-indicators-mobile {
+    display: flex;
+  }
+  
   .chart-card {
-    min-height: 280px;
+    min-height: 350px;
   }
   
   .chart-wrapper {
-    height: 220px;
+    height: 300px;
+    padding: 1rem 0.5rem;
+  }
+
+  .chart-card .card-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .extreme-stats-compact {

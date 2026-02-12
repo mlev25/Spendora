@@ -239,7 +239,7 @@ export default {
     align-items: flex-start;
     gap: 0.5rem;
   }
-  
+
   .toggle-icon {
     align-self: flex-end;
   }

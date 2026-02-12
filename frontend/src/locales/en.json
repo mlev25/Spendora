@@ -13,8 +13,9 @@
         "about": "About Me",
         "q&a": "FAQ",
         "span": "© 2025 Spendora. All rights reserved."
-    },
-    "landing": {
+    },    "toast": {
+        "sessionExpired": "Your session has expired. Please log in again!"
+    },    "landing": {
         "title": "Your finances, simply visible.",
         "subtitle": "Spendora helps you track your expenses and shows you where you can save money.",
         "card-left": {

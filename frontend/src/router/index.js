@@ -59,12 +59,9 @@ const router = createRouter({
 // Navigation guard
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
-    
-    // Ha védett oldalra megy és nincs bejelentkezve
     if (to.meta.requiresAuth && !authStore.isLoggedIn) {
         next('/login');
     }
-    // Ha be van jelentkezve és login/register oldalra megy
     else if (authStore.isLoggedIn && (to.name === 'login' || to.name === 'register')) {
         next('/home');
     }

@@ -20,7 +20,7 @@
         <template v-else>
           <router-link to="/home" class="nav-link">{{ $t('header.home') }}</router-link>
           <router-link to="/profile" class="nav-link">{{ $t('header.profile') }}</router-link>
-          
+
           <button @click="handleLogout" class="logout-btn">{{ $t('header.logout') }}</button>
         </template>
 
@@ -46,7 +46,7 @@ export default {
     },
     computed: {
         darkModeIcon() {
-            return this.isDark ? '🌙' : '🔆'; 
+            return this.isDark ? '🌙' : '🔆';
         },
         isLoggedIn() {
             const authStore = useAuthStore();
@@ -82,7 +82,6 @@ export default {
 </script>
 
 <style scoped>
-/* Flexbox alapú, reszponzív navigáció */
 .main-header {
     background-color: var(--color-card-bg);
     border-bottom: 1px solid var(--color-border);
@@ -216,7 +215,7 @@ export default {
     transform: translateY(-2px);
 }
 
-/* Tablet és kisebb */
+
 @media (max-width: 1023px) {
     .header-container {
         gap: 0.5rem;
@@ -225,13 +224,12 @@ export default {
     .header-nav {
         gap: 0.5rem;
     }
-    
+
     .user-greeting {
         max-width: 120px;
     }
 }
 
-/* Mobil */
 @media (max-width: 640px) {
     .main-header {
         margin: 0.25rem 0.125rem;
@@ -243,12 +241,12 @@ export default {
         justify-content: center;
         gap: 0.5rem;
     }
-    
+
     .header-left {
         flex: 1 1 100%;
         justify-content: center;
     }
-    
+
     .header-nav {
         flex: 1 1 100%;
         justify-content: center;
@@ -259,29 +257,29 @@ export default {
         border-left: none;
         padding-left: 0;
     }
-    
+
     .user-greeting {
         max-width: 100px;
         font-size: 0.75rem;
     }
-    
+
     .logout-btn {
         padding: 0.375rem 0.75rem;
         font-size: 0.8rem;
     }
-    
+
     .nav-link {
         padding: 0.375rem 0.625rem;
         font-size: 0.8rem;
     }
 }
 
-/* Nagyon kis képernyők */
-@media (max-width: 360px) {
+
+@media (max-width: 480px) {
     .header-brand {
         font-size: 1rem;
     }
-    
+
     .theme-toggle-btn {
         font-size: 1.1rem;
     }
