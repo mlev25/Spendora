@@ -344,10 +344,10 @@
         "deleteError": "Hiba történt a fiók törlése során!"
     },
     "chat": {
-        "title": "Pénzügyi Asszisztens",
+        "title": "Spendy Chatbot",
         "openChat": "Chat megnyitása",
         "close": "Bezárás",
-        "welcomeMessage": "Szia! 👋 Pénzügyi tanácsadó asszisztensed vagyok. Hogyan segíthetek ma?",
+        "welcomeMessage": "Szia! Pénzügyi tanácsadó asszisztensed vagyok. Hogyan segíthetek ma?",
         "inputPlaceholder": "Írj egy üzenetet...",
         "send": "Küldés",
         "errorMessage": "Sajnálom, hiba történt. Próbáld újra később!"

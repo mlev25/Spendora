@@ -946,7 +946,6 @@ export default {
 }
 
 .kpi-card {
-  border-left: 4px solid #007bff;
   transition: transform 0.2s, box-shadow 0.2s;
   height: 100%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -955,6 +954,7 @@ export default {
 .kpi-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15);
+  background-color: #daf3f5;
 }
 
 .kpi-card h3 {

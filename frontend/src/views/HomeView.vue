@@ -265,7 +265,7 @@ export default {
 .stats-card:hover {
   box-shadow: 0 8px 24px color-mix(in srgb,
   var(--color-primary) 60%, black);
-  background-color: #9defff;
+  background-color: #239ab2;
 }
 
 .card-title {

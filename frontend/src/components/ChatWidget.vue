@@ -10,7 +10,9 @@
       <!-- Header -->
       <div class="chat-header">
         <div class="chat-title">
-          <span class="chat-icon">🤖</span>
+          <span class="chat-icon">
+            <img src="/ai.png" alt="AI" class="icon-img" />
+          </span>
           <span>{{ $t('chat.title') }}</span>
         </div>
         <button @click="closeChat" class="chat-close-btn" :title="$t('chat.close')">✕</button>
@@ -81,6 +83,17 @@ export default {
       isLoading: false,
     };
   },
+  mounted() {
+    // Üzenetek betöltése sessionStorage-ból
+    const savedMessages = sessionStorage.getItem('chatMessages');
+    if (savedMessages) {
+      try {
+        this.messages = JSON.parse(savedMessages);
+      } catch (e) {
+        console.error('Failed to load chat messages:', e);
+      }
+    }
+  },
   methods: {
     openChat() {
       this.isOpen = true;
@@ -89,6 +102,10 @@ export default {
       this.isOpen = false;
       // Opcionális: chat törlése bezáráskor
       // this.messages = [];
+      // sessionStorage.removeItem('chatMessages');
+    },
+    saveMessages() {
+      sessionStorage.setItem('chatMessages', JSON.stringify(this.messages));
     },
     async sendMessage() {
       if (!this.userInput.trim() || this.isLoading) return;
@@ -101,6 +118,9 @@ export default {
         role: 'user',
         content: userMessage,
       });
+
+      // Mentés sessionStorage-ba
+      this.saveMessages();
 
       // Scroll to bottom
       this.$nextTick(() => {
@@ -120,6 +140,9 @@ export default {
           content: response,
         });
 
+        // Mentés sessionStorage-ba
+        this.saveMessages();
+
         // Scroll to bottom
         this.$nextTick(() => {
           this.scrollToBottom();
@@ -130,6 +153,8 @@ export default {
           role: 'assistant',
           content: this.$t('chat.errorMessage'),
         });
+        // Mentés sessionStorage-ba (hibaüzenettel együtt)
+        this.saveMessages();
       } finally {
         this.isLoading = false;
       }
@@ -385,5 +410,11 @@ export default {
 
 .chat-messages::-webkit-scrollbar-thumb:hover {
   background: #0056b3;
+}
+
+.icon-img {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 </style>
