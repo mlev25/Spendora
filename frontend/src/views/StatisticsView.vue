@@ -48,7 +48,7 @@
             <div class="kpi-carousel-item">
               <div class="card kpi-card">
                 <div class="card-body">
-                  <h6 class="text-muted">{{ $t('statistics.totalExpenses') }}</h6>
+                  <h6 class="text-muted">{{ periodLabel }}</h6>
                   <h3 class="mb-0">{{ formatCurrency(summary.totalExpenses) }}</h3>
                   <small class="text-muted">{{ summary.expenseCount }} {{ $t('statistics.items') }}</small>
                 </div>
@@ -67,8 +67,8 @@
             <div class="kpi-carousel-item">
               <div class="card kpi-card">
                 <div class="card-body">
-                  <h6 class="text-muted">{{ $t('statistics.thisMonth') }}</h6>
-                  <h3 class="mb-0">{{ formatCurrency(summary.thisMonthTotal) }}</h3>
+                  <h6 class="text-muted">{{ $t('statistics.highest') }}</h6>
+                  <h3 class="mb-0">{{ formatCurrency(summary.highestExpense) }}</h3>
                 </div>
               </div>
             </div>
@@ -76,8 +76,8 @@
             <div class="kpi-carousel-item">
               <div class="card kpi-card">
                 <div class="card-body">
-                  <h6 class="text-muted">{{ $t('statistics.thisYear') }}</h6>
-                  <h3 class="mb-0">{{ formatCurrency(summary.thisYearTotal) }}</h3>
+                  <h6 class="text-muted">{{ $t('statistics.lowest') }}</h6>
+                  <h3 class="mb-0">{{ formatCurrency(summary.lowestExpense) }}</h3>
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@
         <div class="col-md-3">
           <div class="card kpi-card">
             <div class="card-body">
-              <h6 class="text-muted">{{ $t('statistics.totalExpenses') }}</h6>
+              <h6 class="text-muted">{{ periodLabel }}</h6>
               <h3 class="mb-0">{{ formatCurrency(summary.totalExpenses) }}</h3>
               <small class="text-muted">{{ summary.expenseCount }} {{ $t('statistics.items') }}</small>
             </div>
@@ -113,8 +113,8 @@
         <div class="col-md-3">
           <div class="card kpi-card">
             <div class="card-body">
-              <h6 class="text-muted">{{ $t('statistics.thisMonth') }}</h6>
-              <h3 class="mb-0">{{ formatCurrency(summary.thisMonthTotal) }}</h3>
+              <h6 class="text-muted">{{ $t('statistics.highest') }}</h6>
+              <h3 class="mb-0">{{ formatCurrency(summary.highestExpense) }}</h3>
             </div>
           </div>
         </div>
@@ -122,8 +122,8 @@
         <div class="col-md-3">
           <div class="card kpi-card">
             <div class="card-body">
-              <h6 class="text-muted">{{ $t('statistics.thisYear') }}</h6>
-              <h3 class="mb-0">{{ formatCurrency(summary.thisYearTotal) }}</h3>
+              <h6 class="text-muted">{{ $t('statistics.lowest') }}</h6>
+              <h3 class="mb-0">{{ formatCurrency(summary.lowestExpense) }}</h3>
             </div>
           </div>
         </div>
@@ -236,16 +236,16 @@
             <hr class="my-3">
 
             <!-- Monthly Comparison Section -->
-            <h5 class="card-title mb-3">{{ $t('statistics.monthComparison') }}</h5>
+            <h5 class="card-title mb-3">{{ comparisonTitle }}</h5>
             <div class="comparison-stats-compact">
               <div class="comparison-row">
                 <div class="comparison-item-compact">
-                  <div class="comparison-period-compact">{{ $t('statistics.thisMonth') }}</div>
+                  <div class="comparison-period-compact">{{ currentPeriodLabel }}</div>
                   <div class="comparison-value-compact current">{{ formatCurrency(summary.thisMonthTotal) }}</div>
                 </div>
                 <div class="comparison-arrow-compact">→</div>
                 <div class="comparison-item-compact">
-                  <div class="comparison-period-compact">{{ $t('statistics.lastMonth') }}</div>
+                  <div class="comparison-period-compact">{{ previousPeriodLabel }}</div>
                   <div class="comparison-value-compact">{{ formatCurrency(summary.lastMonthTotal) }}</div>
                 </div>
               </div>
@@ -542,6 +542,33 @@ export default {
     };
   },
   computed: {
+    periodLabel() {
+      return this.selectedPeriod === 'month' 
+        ? this.$t('statistics.thisMonth') 
+        : this.$t('statistics.thisYear');
+    },
+    comparisonTitle() {
+      return this.selectedPeriod === 'month'
+        ? this.$t('statistics.monthComparison')
+        : this.$t('statistics.yearComparison');
+    },
+    currentPeriodLabel() {
+      if (this.selectedPeriod === 'month') {
+        const [year, month] = this.selectedMonth.split('-');
+        return `${year}.${month}.`;
+      }
+      return this.selectedYear.toString();
+    },
+    previousPeriodLabel() {
+      if (this.selectedPeriod === 'month') {
+        const [year, month] = this.selectedMonth.split('-');
+        const prevMonth = parseInt(month) - 1;
+        const prevYear = prevMonth === 0 ? parseInt(year) - 1 : parseInt(year);
+        const displayMonth = prevMonth === 0 ? 12 : prevMonth;
+        return `${prevYear}.${String(displayMonth).padStart(2, '0')}.`;
+      }
+      return (this.selectedYear - 1).toString();
+    },
     topCategories() {
       if (!this.rawCategories || this.rawCategories.length === 0) return [];
       return this.rawCategories
@@ -585,14 +612,14 @@ export default {
       let avgLabel, avgValue, frequency, freqLabel, ratioLabel;
 
       if (this.selectedPeriod === 'year') {
-        // Éves nézet: havi átlag
+        // Éves nézet: havi átlag (teljes évre vetítve)
         avgValue = this.summary.totalExpenses / 12;
         avgLabel = this.$t('statistics.avgPerMonth');
         frequency = (this.summary.expenseCount / 12).toFixed(1);
         freqLabel = this.$t('statistics.transactionsPerMonth');
         ratioLabel = this.$t('statistics.timesMonthlyAvg');
       } else {
-        // Havi nézet: napi átlag
+        // Havi nézet: napi átlag (csak a kiválasztott hónapra)
         avgValue = this.summary.totalExpenses / daysDiff;
         avgLabel = this.$t('statistics.avgPerDay');
         frequency = (this.summary.expenseCount / daysDiff).toFixed(1);
@@ -611,7 +638,7 @@ export default {
         freqLabel,
         ratio: ratioVsAvg,
         ratioLabel,
-        total: this.summary.totalExpenses,
+        total: this.summary.totalExpenses, // ez most a kiválasztott időszak összege
         countLabel: `${this.summary.expenseCount} ${this.$t('statistics.items')}`,
       };
     },
@@ -660,7 +687,45 @@ export default {
 
     async loadSummary() {
       try {
-        this.summary = await statisticsService.getSummary();
+        const { startDate, endDate } = this.getDateRange();
+        const expenses = await this.getExpensesInRange(startDate, endDate);
+        
+        // Számoljuk az előző időszakot (hónap vagy év)
+        let previousPeriodExpenses = [];
+        if (this.selectedPeriod === 'month') {
+          const [year, month] = this.selectedMonth.split('-');
+          const prevMonthDate = new Date(year, month - 2, 1); // előző hónap első napja
+          const prevMonthEnd = new Date(year, month - 1, 0); // előző hónap utolsó napja
+          previousPeriodExpenses = await this.getExpensesInRange(prevMonthDate, prevMonthEnd);
+        } else if (this.selectedPeriod === 'year') {
+          // Előző év
+          const prevYearStart = new Date(this.selectedYear - 1, 0, 1);
+          const prevYearEnd = new Date(this.selectedYear - 1, 11, 31);
+          previousPeriodExpenses = await this.getExpensesInRange(prevYearStart, prevYearEnd);
+        }
+        
+        // Számítások a kiválasztott időszakra
+        const totalExpenses = expenses.reduce((sum, exp) => sum + parseFloat(exp.price), 0);
+        const expenseCount = expenses.length;
+        const averageExpense = expenseCount > 0 ? totalExpenses / expenseCount : 0;
+        
+        const prices = expenses.map(exp => parseFloat(exp.price));
+        const highestExpense = prices.length > 0 ? Math.max(...prices) : 0;
+        const lowestExpense = prices.length > 0 ? Math.min(...prices) : 0;
+        
+        // Előző időszak összege
+        const lastPeriodTotal = previousPeriodExpenses.reduce((sum, exp) => sum + parseFloat(exp.price), 0);
+        
+        this.summary = {
+          totalExpenses: totalExpenses,
+          expenseCount: expenseCount,
+          averageExpense: averageExpense,
+          highestExpense: highestExpense,
+          lowestExpense: lowestExpense,
+          thisMonthTotal: totalExpenses, // ez most a kiválasztott időszak összege
+          lastMonthTotal: lastPeriodTotal,
+          thisYearTotal: this.selectedPeriod === 'year' ? totalExpenses : 0,
+        };
       } catch (error) {
         console.error('Error loading summary:', error);
       }
