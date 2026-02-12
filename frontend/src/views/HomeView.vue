@@ -249,6 +249,12 @@ export default {
   cursor: pointer;
 }
 
+.stats-card:hover {
+  box-shadow: 0 8px 24px color-mix(in srgb,
+  var(--color-primary) 60%, black);
+  background-color: #9defff;
+}
+
 .card-title {
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   color: var(--color-text);
