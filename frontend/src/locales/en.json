@@ -350,5 +350,23 @@
         "inputPlaceholder": "Type a message...",
         "send": "Send",
         "errorMessage": "Sorry, an error occurred. Please try again later!"
+    },
+    "admin": {
+        "title": "Admin Dashboard",
+        "totalUsers": "Total Users",
+        "totalExpenses": "Total Expenses",
+        "totalAmount": "Total Amount",
+        "avgPerUser": "Average Per User",
+        "userList": "User List",
+        "username": "Username",
+        "name": "Name",
+        "email": "Email",
+        "roles": "Roles",
+        "lastLogin": "Last Login",
+        "loading": "Loading...",
+        "noUsers": "No users found",
+        "loadError": "Error loading data!",
+        "accessDenied": "Access denied! Administrator privileges required.",
+        "never": "Never"
     }
 }

@@ -167,6 +167,21 @@ export const chatService = {
   },
 };
 
+// Admin service
+export const adminService = {
+  // Összes felhasználó lekérése
+  async getAllUsers() {
+    const response = await apiClient.get('/admin/users');
+    return response.data;
+  },
+  
+  // Globális statisztikák
+  async getGlobalStats() {
+    const response = await apiClient.get('/admin/stats');
+    return response.data;
+  },
+};
+
 // Token minden requesthez
 export const setAuthToken = (token) => {
   if (token) {

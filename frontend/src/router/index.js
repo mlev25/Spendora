@@ -53,15 +53,38 @@ const router = createRouter({
             name: "faq",
             component: () => import('../views/FAQView.vue')
         },
+        {
+            path: '/admin',
+            name: "admin",
+            component: () => import('../views/AdminView.vue'),
+            meta: { requiresAuth: true, requiresAdmin: true }
+        },
     ]
 });
 
 // Navigation guard
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
-    if (to.meta.requiresAuth && !authStore.isLoggedIn) {
+    
+    // Admin oldal védelem
+    if (to.meta.requiresAdmin) {
+        const user = authStore.getUser;
+        const isAdmin = user?.roles?.includes('ROLE_ADMIN');
+        
+        if (!authStore.isLoggedIn) {
+            next('/login');
+        } else if (!isAdmin) {
+            alert('Hozzáférés megtagadva! Adminisztrátori jogosultság szükséges.');
+            next('/home');
+        } else {
+            next();
+        }
+    }
+    // Bejelentkezett felhasználó védelem
+    else if (to.meta.requiresAuth && !authStore.isLoggedIn) {
         next('/login');
     }
+    // Ha már be van jelentkezve, ne mehessen login/register-re
     else if (authStore.isLoggedIn && (to.name === 'login' || to.name === 'register')) {
         next('/home');
     }

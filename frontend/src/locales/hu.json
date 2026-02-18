@@ -353,5 +353,23 @@
         "inputPlaceholder": "Írj egy üzenetet...",
         "send": "Küldés",
         "errorMessage": "Sajnálom, hiba történt. Próbáld újra később!"
+    },
+    "admin": {
+        "title": "Admin Vezérlőpult",
+        "totalUsers": "Összes Felhasználó",
+        "totalExpenses": "Összes Kiadás",
+        "totalAmount": "Összes Összeg",
+        "avgPerUser": "Átlag Felhasználónként",
+        "userList": "Felhasználók listája",
+        "username": "Felhasználónév",
+        "name": "Név",
+        "email": "Email",
+        "roles": "Szerepkörök",
+        "lastLogin": "Utolsó Bejelentkezés",
+        "loading": "Betöltés...",
+        "noUsers": "Nincsenek felhasználók",
+        "loadError": "Hiba történt az adatok betöltése során!",
+        "accessDenied": "Hozzáférés megtagadva! Adminisztrátori jogosultság szükséges.",
+        "never": "Soha"
     }
 }

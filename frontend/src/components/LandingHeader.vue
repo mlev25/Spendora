@@ -20,6 +20,7 @@
         <template v-else>
           <router-link to="/home" class="nav-link">{{ $t('header.home') }}</router-link>
           <router-link to="/profile" class="nav-link">{{ $t('header.profile') }}</router-link>
+          <router-link v-if="isAdmin" to="/admin" class="nav-link admin-link">Admin</router-link>
 
           <button @click="handleLogout" class="logout-btn">{{ $t('header.logout') }}</button>
         </template>
@@ -55,6 +56,10 @@ export default {
         userName() {
             const authStore = useAuthStore();
             return authStore.user?.name || authStore.user?.username || 'User';
+        },
+        isAdmin() {
+            const authStore = useAuthStore();
+            return authStore.user?.roles?.includes('ROLE_ADMIN') || false;
         }
     },
     methods: {
@@ -213,6 +218,18 @@ export default {
 .logout-btn:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
+}
+
+.admin-link {
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary-light, rgba(255, 0, 17, 0.289));
+    font-weight: 600;
+    border-radius: 0.5rem;
+}
+
+.admin-link:hover {
+    background-color: var(--color-primary);
+    color: white;
 }
 
 
