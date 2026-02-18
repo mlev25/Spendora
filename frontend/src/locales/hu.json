@@ -205,7 +205,7 @@
             },
             "forgotPassword": {
                 "question": "Elfelejtettem a jelszavam, mit tegyek?",
-                "answer": "Jelenleg fejlesztés alatt áll a jelszó visszaállítási funkció. Addig írj nekünk a kapcsolat oldalon, és segítünk."
+                "answer": "A Profil oldalon találod a 'Jelszó módosítása' opciót."
             },
             "deleteAccount": {
                 "question": "Törölhetem a fiókomat?",

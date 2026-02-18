@@ -65,6 +65,8 @@ public class ChatService {
             return "A felhasználónak még nincsenek rögzített kiadásai.";
         }
 
+        StringBuilder context = new StringBuilder();
+
         // Összes kiadás
         double totalExpenses = expenses.stream()
                 .mapToDouble(e -> e.getPrice().doubleValue())
@@ -73,24 +75,63 @@ public class ChatService {
         // Átlagos kiadás
         double avgExpense = totalExpenses / expenses.size();
 
-        // Kategóriák szerinti csoportosítás
+        // Legnagyobb és legkisebb kiadás
+        double maxExpense = expenses.stream()
+                .mapToDouble(e -> e.getPrice().doubleValue())
+                .max()
+                .orElse(0);
+        
+        double minExpense = expenses.stream()
+                .mapToDouble(e -> e.getPrice().doubleValue())
+                .min()
+                .orElse(0);
+
+        context.append(String.format("=== ÁLTALÁNOS STATISZTIKÁK ===\n"));
+        context.append(String.format("Összes kiadás: %.0f Ft\n", totalExpenses));
+        context.append(String.format("Tranzakciók száma: %d db\n", expenses.size()));
+        context.append(String.format("Átlagos tranzakció: %.0f Ft\n", avgExpense));
+        context.append(String.format("Legnagyobb kiadás: %.0f Ft\n", maxExpense));
+        context.append(String.format("Legkisebb kiadás: %.0f Ft\n\n", minExpense));
+
+        // ÖSSZES kategória szerinti bontás
         Map<String, Double> categoryTotals = expenses.stream()
                 .collect(Collectors.groupingBy(
                         e -> e.getCategory().getName(),
                         Collectors.summingDouble(e -> e.getPrice().doubleValue())
                 ));
 
-        // Top 3 kategória
-        String top3Categories = categoryTotals.entrySet().stream()
+        context.append("=== KATEGÓRIÁK SZERINT (mind) ===\n");
+        categoryTotals.entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
-                .limit(3)
-                .map(e -> String.format("%s (%.0f Ft)", e.getKey(), e.getValue()))
-                .collect(Collectors.joining(", "));
+                .forEach(entry -> {
+                    double percentage = (entry.getValue() / totalExpenses) * 100;
+                    context.append(String.format("- %s: %.0f Ft (%.1f%%)\n", 
+                        entry.getKey(), entry.getValue(), percentage));
+                });
 
-        return String.format(
-                "Havi összes kiadás: %.0f Ft | Átlagos kiadás: %.0f Ft | Összes tranzakció: %d db | Top 3 kategória: %s",
-                totalExpenses, avgExpense, expenses.size(), top3Categories
-        );
+        // Havi bontás
+        Map<String, Double> monthlyTotals = expenses.stream()
+                .collect(Collectors.groupingBy(
+                        e -> {
+                            var date = e.getDate();
+                            return String.format("%d-%02d", 
+                                date.getYear(), 
+                                date.getMonthValue());
+                        },
+                        Collectors.summingDouble(e -> e.getPrice().doubleValue())
+                ));
+
+        if (monthlyTotals.size() > 1) {
+            context.append("\n=== HAVI BONTÁS ===\n");
+            monthlyTotals.entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(entry -> 
+                        context.append(String.format("- %s: %.0f Ft\n", 
+                            entry.getKey(), entry.getValue()))
+                    );
+        }
+
+        return context.toString();
     }
 
     private String buildFullPrompt(String userContext, List<ChatMessageDTO> messages) {

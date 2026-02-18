@@ -202,7 +202,7 @@
             },
             "forgotPassword": {
                 "question": "I forgot my password, what should I do?",
-                "answer": "The password reset feature is currently under development. In the meantime, contact us on the contact page and we'll help."
+                "answer": "You can find the 'Change Password' option on the Profile page."
             },
             "deleteAccount": {
                 "question": "Can I delete my account?",
