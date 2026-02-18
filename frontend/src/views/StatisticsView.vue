@@ -319,6 +319,7 @@
 </template>
 
 <script>
+import './styles/StatisticsView.css';
 import { Pie, Bar, Line } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Filler } from 'chart.js';
 import { statisticsService, expenseService } from '@/services/api';

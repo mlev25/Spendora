@@ -96,6 +96,7 @@
 </template>
 
 <script>
+import './styles/AdminView.css';
 import { adminService } from '@/services/api';
 
 export default {
@@ -154,54 +155,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.admin-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.stat-card {
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.stat-card h2 {
-  color: #007bff;
-  font-weight: bold;
-}
-
-.table {
-  margin-bottom: 0;
-}
-
-.table thead {
-  background: #f8f9fa;
-}
-
-.table tbody tr:hover {
-  background: #f8f9fa;
-}
-
-.badge {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-}
-
-@media (max-width: 768px) {
-  .admin-container {
-    padding: 1rem;
-  }
-  
-  .table-responsive {
-    font-size: 0.875rem;
-  }
-}
-</style>

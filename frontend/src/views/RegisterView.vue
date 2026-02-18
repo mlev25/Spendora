@@ -104,6 +104,7 @@
 </template>
 
 <script>
+import './styles/RegisterView.css';
 import { authService } from '../services/api.js';
 
 export default {

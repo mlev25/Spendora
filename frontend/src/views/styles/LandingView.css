@@ -1,0 +1,132 @@
+.landing-main-content {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: var(--color-background);
+    min-height: 70vh;
+    border-radius: 1.5rem;
+}
+
+.main-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Dinamikus méretezés */
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.5rem); /* Dinamikus méretezés */
+    margin-bottom: 3rem;
+    color: var(--color-text);
+    opacity: 0.9;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* A 3 kártya elrendezése CSS Grid-del */
+.card-grid {
+    display: grid;
+    gap: clamp(1rem, 2vw, 2rem); /* Dinamikus gap */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Mobil és Tablet: 1 oszlop középre igazítva, max szélességgel */
+.card-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.info-card, .cta-card {
+    width: 100%;
+    max-width: clamp(230px, 80vw, 600px);
+}
+
+/* Desktop: 3 oszlop */
+@media (min-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: stretch;
+    }
+    
+    .info-card, .cta-card {
+        max-width: none;
+    }
+}
+
+/* Kártya alap stílus */
+.info-card, .cta-card {
+    padding: clamp(1.5rem, 3vw, 2.5rem); /* Dinamikus padding */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-card-bg);
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+}
+
+/* Hover effekt csak desktop-on */
+@media (min-width: 1024px) {
+    .info-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--color-primary) 60%, black);
+    }
+}
+
+.card-title {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem); /* Dinamikus méretezés */
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem); /* Dinamikus méretezés */
+    line-height: 1.6;
+}
+
+/* CTA kártya kiemelése */
+.cta-card {
+    background-color: var(--color-primary);
+    color: white;
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--color-primary) 50%, black);
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1.5rem;
+    background-color: white;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+.cta-btn:hover {
+    background-color: rgb(7, 255, 205);
+    transform: scale(1.05);
+}
+
+/* Kis képernyőkön (mobil) */
+@media (max-width: 639px) {
+    .landing-main-content {
+        padding: 2rem 0.5rem;
+    }
+    
+    .info-card, .cta-card {
+        min-height: 200px;
+    }
+}
