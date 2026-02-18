@@ -16,8 +16,8 @@
         <div class="info-card">
           <h3>{{ $t('contact.social.title') }}</h3>
           <div class="social-links">
-            <a href="#" class="social-link">GitHub</a>
-            <a href="#" class="social-link">LinkedIn</a>
+            <a href="https://github.com/mlev25/Spendora" class="social-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/levente-m%C3%A9sz%C3%A1ros-327454361/" class="social-link">LinkedIn</a>
           </div>
         </div>
       </div>
