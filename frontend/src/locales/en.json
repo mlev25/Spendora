@@ -345,6 +345,7 @@
         "title": "Financial Assistant",
         "openChat": "Open chat",
         "close": "Close",
+        "restart": "Restart",
         "welcomeMessage": "Hi! 👋 I'm your financial advisor assistant. How can I help you today?",
         "inputPlaceholder": "Type a message...",
         "send": "Send",

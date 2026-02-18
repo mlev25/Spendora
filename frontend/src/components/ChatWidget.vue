@@ -15,7 +15,10 @@
           </span>
           <span>{{ $t('chat.title') }}</span>
         </div>
-        <button @click="closeChat" class="chat-close-btn" :title="$t('chat.close')">✕</button>
+        <div class="chat-header-buttons">
+          <button @click="resetChat" class="chat-reset-btn" :title="$t('chat.restart')">↻</button>
+          <button @click="closeChat" class="chat-close-btn" :title="$t('chat.close')">✕</button>
+        </div>
       </div>
 
       <!-- Messages -->
@@ -103,6 +106,19 @@ export default {
       // Opcionális: chat törlése bezáráskor
       // this.messages = [];
       // sessionStorage.removeItem('chatMessages');
+    },
+    resetChat() {
+      // Üzenetek törlése
+      this.messages = [];
+      // SessionStorage törlése
+      sessionStorage.removeItem('chatMessages');
+      // Scroll to top
+      this.$nextTick(() => {
+        const container = this.$refs.messagesContainer;
+        if (container) {
+          container.scrollTop = 0;
+        }
+      });
     },
     saveMessages() {
       sessionStorage.setItem('chatMessages', JSON.stringify(this.messages));
@@ -227,6 +243,13 @@ export default {
   font-size: 1.5rem;
 }
 
+.chat-header-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chat-reset-btn,
 .chat-close-btn {
   background: transparent;
   border: none;
@@ -243,6 +266,7 @@ export default {
   transition: background 0.2s;
 }
 
+.chat-reset-btn:hover,
 .chat-close-btn:hover {
   background: rgba(255, 255, 255, 0.2);
 }

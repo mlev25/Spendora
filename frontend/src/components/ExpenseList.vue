@@ -220,6 +220,7 @@ export default {
 }
 
 .expense-table tbody tr {
+  background-color: var(--color-background);
   transition: background-color 0.2s ease;
 }
 

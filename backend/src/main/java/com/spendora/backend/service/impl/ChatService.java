@@ -114,7 +114,7 @@ public class ChatService {
         prompt.append("- Barátságos, de professzionális\n");
         prompt.append("- Rövid, tömör válaszok (max 3-4 mondat, kivéve ha részletesebb magyarázatot kérnek)\n");
         prompt.append("- Konkrét, gyakorlatias tanácsok\n");
-        prompt.append("- Magyar nyelven válaszolj\n\n");
+        prompt.append("- Magyar nyelven válaszolj, vagy olyan nyelven, ahogy elkezdte a beszélgetést a felhasználó.\n\n");
 
         // Beszélgetés history
         prompt.append("=== BESZÉLGETÉS ===\n");
