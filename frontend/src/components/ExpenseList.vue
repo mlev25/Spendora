@@ -1,9 +1,9 @@
 <template>
   <div class="expense-list-container">
     <div class="list-header">
-      <h2>{{ $t('expense.myExpenses') }}</h2>
+      <h2 v-if="!hideTitle">{{ $t('expense.myExpenses') }}</h2>
       <div class="header-actions">
-        <div class="filter-buttons">
+        <div v-if="!hideFilters" class="filter-buttons">
           <button 
             class="filter-btn" 
             :class="{ active: activeFilter === 'all' }"
@@ -33,7 +33,7 @@
             {{ $t('expense.filters.last30Days') }}
           </button>
         </div>
-        <button class="btn-add" @click="$emit('add')">
+        <button v-if="!hideFilters" class="btn-add" @click="$emit('add')">
           + {{ $t('expense.addNew') }}
         </button>
       </div>
@@ -58,7 +58,7 @@
             <th>{{ $t('expense.category') }}</th>
             <th>{{ $t('expense.price') }}</th>
             <th>{{ $t('expense.date') }}</th>
-            <th>{{ $t('expense.actions') }}</th>
+            <th v-if="!readOnly">{{ $t('expense.actions') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -79,7 +79,7 @@
             </td>
             <td class="price-cell">{{ formatPrice(expense.price) }} Ft</td>
             <td>{{ formatDate(expense.date) }}</td>
-            <td>
+            <td v-if="!readOnly">
               <div class="action-buttons">
                 <button
                   class="btn-icon btn-edit"
@@ -125,6 +125,18 @@ export default {
     activeFilter: {
       type: String,
       default: 'all',
+    },
+    hideFilters: {
+      type: Boolean,
+      default: false,
+    },
+    hideTitle: {
+      type: Boolean,
+      default: false,
+    },
+    readOnly: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {

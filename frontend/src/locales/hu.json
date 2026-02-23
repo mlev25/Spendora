@@ -325,7 +325,8 @@
         "timesWeeklyAvg": "a heti átlaghoz képest",
         "timesMonthlyAvg": "a havi átlaghoz képest",
         "noData": "Nincs megjeleníthető adat",
-        "loadError": "Hiba történt a statisztikák betöltése során!"
+        "loadError": "Hiba történt a statisztikák betöltése során!",
+        "expensesList": "Kiadások listája"
     },
     "months": {
         "jan": "Január",

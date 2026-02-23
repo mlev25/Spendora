@@ -46,7 +46,7 @@
         <div class="kpi-carousel-wrapper">
           <div class="kpi-carousel-track" :style="{ transform: `translateX(-${currentKpiIndex * 100}%)` }">
             <div class="kpi-carousel-item">
-              <div class="card kpi-card">
+              <div class="card kpi-card clickable" @click="showExpenses">
                 <div class="card-body">
                   <h6 class="text-muted">{{ periodLabel }}</h6>
                   <h3 class="mb-0">{{ formatCurrency(summary.totalExpenses) }}</h3>
@@ -92,7 +92,7 @@
       <!-- Desktop Grid -->
       <div class="kpi-grid-desktop row g-3">
         <div class="col-md-3">
-          <div class="card kpi-card">
+          <div class="card kpi-card clickable" @click="showExpenses">
             <div class="card-body">
               <h6 class="text-muted">{{ periodLabel }}</h6>
               <h3 class="mb-0">{{ formatCurrency(summary.totalExpenses) }}</h3>
@@ -315,6 +315,31 @@
         </div>
       </div>
     </div>
+
+    <!-- Expenses Modal -->
+    <div v-if="showExpensesModal" class="modal-overlay" @click.self="closeExpensesModal">
+      <div class="modal-content-large">
+        <div class="modal-header">
+          <h3>{{ periodLabel }} - {{ $t('statistics.expensesList') }}</h3>
+          <button class="close-btn" @click="closeExpensesModal">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="expenses-wrapper">
+            <ExpenseList
+              :expenses="periodExpenses"
+              :categories="categories"
+              :loading="loadingExpenses"
+              :activeFilter="'all'"
+              :hide-filters="true"
+              :hide-title="true"
+              :read-only="true"
+              @edit="handleEdit"
+              @delete="handleDelete"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -322,7 +347,8 @@
 import './styles/StatisticsView.css';
 import { Pie, Bar, Line } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Filler } from 'chart.js';
-import { statisticsService, expenseService } from '@/services/api';
+import { statisticsService, expenseService, categoryService } from '@/services/api';
+import ExpenseList from '@/components/ExpenseList.vue';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Filler);
 
@@ -332,6 +358,7 @@ export default {
     Pie,
     Bar,
     Line,
+    ExpenseList,
   },
   data() {
     return {
@@ -345,6 +372,10 @@ export default {
       monthlyData: null,
       trendData: null,
       rawCategories: null,
+      showExpensesModal: false,
+      periodExpenses: [],
+      categories: [],
+      loadingExpenses: false,
       pieOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -642,6 +673,14 @@ export default {
         total: this.summary.totalExpenses, // ez most a kiválasztott időszak összege
         countLabel: `${this.summary.expenseCount} ${this.$t('statistics.items')}`,
       };
+    },
+  },
+  watch: {
+    '$i18n.locale'() {
+      // Amikor változik a nyelv, újratöltjük az adatokat hogy a labelek frissüljenek
+      if (this.categoryData || this.monthlyData || this.trendData) {
+        this.loadData();
+      }
     },
   },
   mounted() {
@@ -982,6 +1021,51 @@ export default {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       }).format(value);
+    },
+
+    async showExpenses() {
+      this.showExpensesModal = true;
+      this.loadingExpenses = true;
+      
+      try {
+        const { startDate, endDate } = this.getDateRange();
+        const [expenses, categories] = await Promise.all([
+          expenseService.getAll(),
+          categoryService.getAll(),
+        ]);
+        
+        // Szűrjük az adott időszak kiadásait
+        this.periodExpenses = expenses.filter(exp => {
+          const expDate = new Date(exp.date);
+          return expDate >= startDate && expDate <= endDate;
+        }).sort((a, b) => new Date(b.date) - new Date(a.date)); // Dátum szerint csökkenő
+        
+        this.categories = categories;
+      } catch (error) {
+        console.error('Failed to load expenses:', error);
+      } finally {
+        this.loadingExpenses = false;
+      }
+    },
+
+    closeExpensesModal() {
+      this.showExpensesModal = false;
+      this.periodExpenses = [];
+    },
+
+    handleEdit(expense) {
+      this.$router.push(`/expenses/${expense.id}`);
+    },
+
+    async handleDelete(expenseId) {
+      try {
+        await expenseService.delete(expenseId);
+        await this.showExpenses();
+        await this.loadData();
+      } catch (error) {
+        console.error('Failed to delete expense:', error);
+        alert(this.$t('expense.deleteError'));
+      }
     },
 
     createBarGradients(values) {

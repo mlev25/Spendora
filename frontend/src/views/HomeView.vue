@@ -264,7 +264,3 @@ export default {
   },
 };
 </script>
-
-.welcome-title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-

@@ -322,7 +322,8 @@
         "timesWeeklyAvg": "vs weekly average",
         "timesMonthlyAvg": "vs monthly average",
         "noData": "No data to display",
-        "loadError": "Error loading statistics!"
+        "loadError": "Error loading statistics!",
+        "expensesList": "Expenses List"
     },
     "months": {
         "jan": "January",

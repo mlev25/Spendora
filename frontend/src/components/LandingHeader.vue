@@ -82,6 +82,11 @@ export default {
     mounted() {
         const initialTheme = this.isDark ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', initialTheme);
+        
+        // Betöltjük a tárolt nyelvet
+        const savedLocale = localStorage.getItem('locale') || 'hu';
+        this.currentLang = savedLocale.toUpperCase();
+        this.$i18n.locale = savedLocale;
     }
 };
 </script>
