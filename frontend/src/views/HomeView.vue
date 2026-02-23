@@ -40,7 +40,7 @@
             class="category-badge"
             :style="{ backgroundColor: category.color }"
           >
-            {{ category.name }}
+            {{ getCategoryTranslation(category.name) }}
           </span>
         </div>
       </div>
@@ -255,6 +255,11 @@ export default {
     },
     handleFilterChange(filterType) {
       this.filterType = filterType;
+    },
+    getCategoryTranslation(categoryName) {
+      const translationKey = `categories.${categoryName}`;
+      const translated = this.$t(translationKey);
+      return translated !== translationKey ? translated : categoryName;
     },
   },
 };

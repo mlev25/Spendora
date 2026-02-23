@@ -198,7 +198,7 @@
                 <div class="category-rank">{{ index + 1 }}</div>
                 <div class="category-color" :style="{ backgroundColor: cat.categoryColor }"></div>
                 <div class="category-info">
-                  <div class="category-name">{{ cat.categoryName }}</div>
+                  <div class="category-name">{{ getCategoryTranslation(cat.categoryName) }}</div>
                   <div class="category-details">
                     <span>{{ cat.expenseCount }} {{ $t('statistics.items') }}</span>
                   </div>
@@ -649,6 +649,11 @@ export default {
     this.loadData();
   },
   methods: {
+    getCategoryTranslation(categoryName) {
+      const translationKey = `categories.${categoryName}`;
+      const translated = this.$t(translationKey);
+      return translated !== translationKey ? translated : categoryName;
+    },
     prevKpi() {
       if (this.currentKpiIndex > 0) {
         this.currentKpiIndex--;
@@ -740,7 +745,7 @@ export default {
         if (categories && categories.length > 0) {
           this.rawCategories = categories;
           this.categoryData = {
-            labels: categories.map(c => c.categoryName),
+            labels: categories.map(c => this.getCategoryTranslation(c.categoryName)),
             datasets: [{
               data: categories.map(c => c.totalAmount),
               percentages: categories.map(c => c.percentage.toFixed(1)),

@@ -130,7 +130,11 @@ export default {
   methods: {
     getCategoryName(categoryId) {
       const category = this.categories.find((c) => c.id === categoryId);
-      return category ? category.name : this.$t('expense.unknown');
+      if (!category) return this.$t('expense.unknown');
+      
+      const translationKey = `categories.${category.name}`;
+      const translated = this.$t(translationKey);
+      return translated !== translationKey ? translated : category.name;
     },
     getCategoryColor(categoryId) {
       const category = this.categories.find((c) => c.id === categoryId);

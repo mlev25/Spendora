@@ -46,7 +46,7 @@
               :key="category.id"
               :value="category.id"
             >
-              {{ category.name }}
+              {{ getCategoryTranslation(category.name) }}
             </option>
           </select>
         </div>
@@ -258,7 +258,14 @@ export default {
         console.error('AI prediction failed:', error);
         this.useAiPrediction = false;
         // Nem dobunk errort, mert az AI opcionális funkció
+      } finally {
+        this.aiPredicting = false;
       }
+    },
+    getCategoryTranslation(categoryName) {
+      const translationKey = `categories.${categoryName}`;
+      const translated = this.$t(translationKey);
+      return translated !== translationKey ? translated : categoryName;
     },
   },
 };

@@ -254,6 +254,28 @@
         "saving": "Saving...",
         "loading": "Loading"
     },
+    "categories": {
+        "Étel és Ital": "Food & Drinks",
+        "Étel és ital": "Food & Drinks",
+        "Közlekedés": "Transportation",
+        "Lakhatás": "Housing",
+        "Szórakozás": "Entertainment",
+        "Egészség": "Health",
+        "Ruházat": "Clothing",
+        "Oktatás": "Education",
+        "Sport": "Sports",
+        "Utazás": "Travel",
+        "Eszközök": "Tools",
+        "Egyéb": "Other",
+        "Élelmiszer": "Food",
+        "Rezsik": "Utilities",
+        "Állatok": "Pets",
+        "Ajándék": "Gifts",
+        "Elektronika": "Electronics",
+        "Büfé": "Snack Bar",
+        "Étterem": "Restaurant",
+        "Bevásárlás": "Shopping"
+    },
     "roles": {
         "USER": "User",
         "ADMIN": "Administrator",

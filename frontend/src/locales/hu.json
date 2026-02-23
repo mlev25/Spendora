@@ -257,6 +257,28 @@
         "saving": "Mentés...",
         "loading": "Betöltés"
     },
+    "categories": {
+        "Étel és Ital": "Étel és Ital",
+        "Étel és ital": "Étel és ital",
+        "Közlekedés": "Közlekedés",
+        "Lakhatás": "Lakhatás",
+        "Szórakozás": "Szórakozás",
+        "Egészség": "Egészség",
+        "Ruházat": "Ruházat",
+        "Oktatás": "Oktatás",
+        "Sport": "Sport",
+        "Utazás": "Utazás",
+        "Eszközök": "Eszközök",
+        "Egyéb": "Egyéb",
+        "Élelmiszer": "Élelmiszer",
+        "Rezsik": "Rezsik",
+        "Állatok": "Állatok",
+        "Ajándék": "Ajándék",
+        "Elektronika": "Elektronika",
+        "Büfé": "Büfé",
+        "Étterem": "Étterem",
+        "Bevásárlás": "Bevásárlás"
+    },
     "roles": {
         "USER": "Alapfelhasználó",
         "ADMIN": "Adminisztrátor",
