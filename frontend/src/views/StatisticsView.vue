@@ -1510,6 +1510,7 @@ export default {
 
 .carousel-nav-btn {
   position: absolute;
+  align-self: start;
   top: 50%;
   transform: translateY(-50%);
   background: white;
@@ -1527,7 +1528,7 @@ export default {
 }
 
 .carousel-nav-btn:hover:not(:disabled) {
-  background: #007bff;
+  background: #34404d;
   color: white;
   transform: translateY(-50%) scale(1.1);
 }
