@@ -240,7 +240,13 @@
         "aiPrediction": "AI Categorization",
         "aiHint": "Artificial intelligence will automatically select the most suitable category",
         "aiLoading": "Analyzing...",
-        "aiPredicted": "AI suggestion: {category}"
+        "aiPredicted": "AI suggestion: {category}",
+        "filters": {
+            "all": "All",
+            "thisWeek": "This Week",
+            "thisMonth": "This Month",
+            "last30Days": "Last 30 Days"
+        }
     },
     "common": {
         "cancel": "Cancel",

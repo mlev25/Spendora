@@ -2,9 +2,41 @@
   <div class="expense-list-container">
     <div class="list-header">
       <h2>{{ $t('expense.myExpenses') }}</h2>
-      <button class="btn-add" @click="$emit('add')">
-        + {{ $t('expense.addNew') }}
-      </button>
+      <div class="header-actions">
+        <div class="filter-buttons">
+          <button 
+            class="filter-btn" 
+            :class="{ active: activeFilter === 'all' }"
+            @click="$emit('filter-change', 'all')"
+          >
+            {{ $t('expense.filters.all') }}
+          </button>
+          <button 
+            class="filter-btn" 
+            :class="{ active: activeFilter === 'week' }"
+            @click="$emit('filter-change', 'week')"
+          >
+            {{ $t('expense.filters.thisWeek') }}
+          </button>
+          <button 
+            class="filter-btn" 
+            :class="{ active: activeFilter === 'month' }"
+            @click="$emit('filter-change', 'month')"
+          >
+            {{ $t('expense.filters.thisMonth') }}
+          </button>
+          <button 
+            class="filter-btn" 
+            :class="{ active: activeFilter === 'last30' }"
+            @click="$emit('filter-change', 'last30')"
+          >
+            {{ $t('expense.filters.last30Days') }}
+          </button>
+        </div>
+        <button class="btn-add" @click="$emit('add')">
+          + {{ $t('expense.addNew') }}
+        </button>
+      </div>
     </div>
 
     <div v-if="loading" class="loading-state">
@@ -89,6 +121,10 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    activeFilter: {
+      type: String,
+      default: 'all',
     },
   },
   methods: {

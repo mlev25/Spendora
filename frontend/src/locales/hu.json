@@ -243,7 +243,13 @@
         "aiPrediction": "AI kategórizálás",
         "aiHint": "Automatikusan kiválasztja a legmegfelelőbb kategóriát",
         "aiLoading": "Elemzés...",
-        "aiPredicted": "AI javaslat: {category}"
+        "aiPredicted": "AI javaslat: {category}",
+        "filters": {
+            "all": "Összes",
+            "thisWeek": "Ezen a héten",
+            "thisMonth": "Ebben a hónapban",
+            "last30Days": "Elmúlt 30 nap"
+        }
     },
     "common": {
         "cancel": "Mégse",

@@ -70,8 +70,8 @@
         <p>{{ $t('about.creator.description') }}</p>
         <p>{{ $t('about.creator.thesis') }}</p>
         <div class="creator-links">
-          <a href="#" class="creator-link">GitHub</a>
-          <a href="#" class="creator-link">LinkedIn</a>
+          <a href="https://github.com/mlev25/Spendora" class="creator-link">GitHub</a>
+          <a href="https://www.linkedin.com/in/levente-m%C3%A9sz%C3%A1ros-327454361/" class="creator-link">LinkedIn</a>
           <a href="/contact" class="creator-link">{{ $t('about.creator.contact') }}</a>
         </div>
       </section>

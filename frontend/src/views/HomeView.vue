@@ -67,12 +67,14 @@
 
     <!-- Expense lista -->
     <ExpenseList
-      :expenses="expenses"
+      :expenses="filteredExpenses"
       :categories="categories"
       :loading="loading"
+      :activeFilter="filterType"
       @add="openAddModal"
       @edit="openEditModal"
       @delete="deleteExpense"
+      @filter-change="handleFilterChange"
     />
 
     <!-- Add/Edit Modal -->
@@ -112,6 +114,7 @@ export default {
       loading: false,
       isModalOpen: false,
       selectedExpense: null,
+      filterType: 'all',
     };
   },
   computed: {
@@ -147,6 +150,55 @@ export default {
         .reduce((sum, expense) => sum + parseFloat(expense.price), 0);
 
       return new Intl.NumberFormat('hu-HU').format(total);
+    },
+    filteredExpenses() {
+      let filtered = [];
+      
+      if (this.filterType === 'all') {
+        filtered = this.expenses;
+      } else {
+        const now = new Date();
+        now.setHours(23, 59, 59, 999); // Nap vége
+        let startDate;
+
+        switch (this.filterType) {
+          case 'week':
+            // Hét eleje (hétfő)
+            startDate = new Date(now);
+            const dayOfWeek = now.getDay();
+            const diff = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // vasárnap = 0
+            startDate.setDate(now.getDate() - diff);
+            startDate.setHours(0, 0, 0, 0);
+            break;
+          case 'month':
+            // Hónap eleje
+            startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            startDate.setHours(0, 0, 0, 0);
+            break;
+          case 'last30':
+            // Elmúlt 30 nap
+            startDate = new Date(now);
+            startDate.setDate(now.getDate() - 30);
+            startDate.setHours(0, 0, 0, 0);
+            break;
+          default:
+            filtered = this.expenses;
+        }
+
+        if (startDate) {
+          filtered = this.expenses.filter((expense) => {
+            const expenseDate = new Date(expense.date);
+            return expenseDate >= startDate && expenseDate <= now;
+          });
+        }
+      }
+
+      // Rendezés dátum szerint csökkenő sorrendben (legfrissebb felül)
+      return [...filtered].sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB - dateA;
+      });
     },
   },
   async mounted() {
@@ -200,6 +252,9 @@ export default {
       if (this.openChatFunc) {
         this.openChatFunc();
       }
+    },
+    handleFilterChange(filterType) {
+      this.filterType = filterType;
     },
   },
 };
