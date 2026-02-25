@@ -240,7 +240,7 @@
         "aiPrediction": "AI Categorization",
         "aiHint": "Artificial intelligence will automatically select the most suitable category",
         "aiLoading": "Analyzing...",
-        "aiPredicted": "AI suggestion: {category}",
+        "aiSuccess": "Category set!",
         "filters": {
             "all": "All",
             "thisWeek": "This Week",
@@ -337,7 +337,19 @@
         "sep": "September",
         "oct": "October",
         "nov": "November",
-        "dec": "December"
+        "dec": "December",
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
     },
     "profile": {
         "title": "My Profile",

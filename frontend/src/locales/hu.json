@@ -243,7 +243,7 @@
         "aiPrediction": "AI kategórizálás",
         "aiHint": "Automatikusan kiválasztja a legmegfelelőbb kategóriát",
         "aiLoading": "Elemzés...",
-        "aiPredicted": "AI javaslat: {category}",
+        "aiSuccess": "Kategória beállítva!",
         "filters": {
             "all": "Összes",
             "thisWeek": "Ezen a héten",
@@ -340,7 +340,19 @@
         "sep": "Szeptember",
         "oct": "Október",
         "nov": "November",
-        "dec": "December"
+        "dec": "December",
+        "1": "Január",
+        "2": "Február",
+        "3": "Március",
+        "4": "Április",
+        "5": "Május",
+        "6": "Június",
+        "7": "Július",
+        "8": "Augusztus",
+        "9": "Szeptember",
+        "10": "Október",
+        "11": "November",
+        "12": "December"
     },
     "profile": {
         "title": "Profilom",

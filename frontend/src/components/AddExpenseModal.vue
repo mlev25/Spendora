@@ -247,12 +247,12 @@ export default {
 
         if (predictedCategory) {
           this.formData.categoryId = predictedCategory.id;
-          this.aiPredictedMessage = this.$t('expense.aiPredicted', { category: predictedCategory.name });
+          this.aiPredictedMessage = this.$t('expense.aiSuccess');
           
-          // Üzenet eltüntetése 5 másodperc után
+          // Üzenet eltüntetése 3 másodperc után
           setTimeout(() => {
             this.aiPredictedMessage = '';
-          }, 5000);
+          }, 3000);
         }
       } catch (error) {
         console.error('AI prediction failed:', error);

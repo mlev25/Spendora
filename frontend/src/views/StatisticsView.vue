@@ -16,7 +16,34 @@
           
           <div v-if="selectedPeriod === 'month'" class="col-md-3">
             <label class="form-label">{{ $t('statistics.selectMonth') }}</label>
-            <input type="month" v-model="selectedMonth" class="form-control" @change="loadData" />
+            <div class="row g-2">
+              <div class="col-7">
+                <select v-model="monthNumber" class="form-select" @change="updateSelectedMonth">
+                  <option value="01">{{ $t('months.1') }}</option>
+                  <option value="02">{{ $t('months.2') }}</option>
+                  <option value="03">{{ $t('months.3') }}</option>
+                  <option value="04">{{ $t('months.4') }}</option>
+                  <option value="05">{{ $t('months.5') }}</option>
+                  <option value="06">{{ $t('months.6') }}</option>
+                  <option value="07">{{ $t('months.7') }}</option>
+                  <option value="08">{{ $t('months.8') }}</option>
+                  <option value="09">{{ $t('months.9') }}</option>
+                  <option value="10">{{ $t('months.10') }}</option>
+                  <option value="11">{{ $t('months.11') }}</option>
+                  <option value="12">{{ $t('months.12') }}</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <input 
+                  type="number" 
+                  v-model.number="monthYear" 
+                  class="form-control" 
+                  :min="2020" 
+                  :max="new Date().getFullYear() + 1" 
+                  @change="updateSelectedMonth"
+                />
+              </div>
+            </div>
           </div>
 
           <div v-if="selectedPeriod === 'year'" class="col-md-3">
@@ -361,12 +388,18 @@ export default {
     ExpenseList,
   },
   data() {
+    const now = new Date();
+    const currentMonth = String(now.getMonth() + 1).padStart(2, '0');
+    const currentYear = now.getFullYear();
+    
     return {
       currentKpiIndex: 0,
       loading: false,
       selectedPeriod: 'month',
-      selectedMonth: '',
-      selectedYear: new Date().getFullYear(),
+      selectedMonth: `${currentYear}-${currentMonth}`,
+      monthNumber: currentMonth,
+      monthYear: currentYear,
+      selectedYear: currentYear,
       summary: null,
       categoryData: null,
       monthlyData: null,
@@ -705,8 +738,15 @@ export default {
     },
     initializeFilters() {
       const now = new Date();
-      this.selectedMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+      this.monthNumber = String(now.getMonth() + 1).padStart(2, '0');
+      this.monthYear = now.getFullYear();
+      this.selectedMonth = `${this.monthYear}-${this.monthNumber}`;
       this.selectedYear = now.getFullYear();
+    },
+    
+    updateSelectedMonth() {
+      this.selectedMonth = `${this.monthYear}-${this.monthNumber}`;
+      this.loadData();
     },
     
     onPeriodChange() {

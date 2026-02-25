@@ -4,6 +4,44 @@
   margin: 0 auto;
 }
 
+/* Input styling fix - no blue background */
+input[type="number"].form-control,
+select.form-select {
+  background-color: #fff !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="number"].form-control:focus,
+select.form-select:focus {
+  background-color: #fff !important;
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Prevent autofill styling */
+input[type="number"].form-control:-webkit-autofill,
+input[type="number"].form-control:-webkit-autofill:hover,
+input[type="number"].form-control:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  background-color: white !important;
+}
+
+/* Mobile responsive select/input */
+@media (max-width: 768px) {
+  .statistics-container {
+    padding: 1rem;
+  }
+  
+  select.form-select,
+  input[type="number"].form-control {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.5rem;
+  }
+}
+
 .kpi-card {
   transition: transform 0.2s, box-shadow 0.2s;
   height: 100%;
@@ -542,7 +580,7 @@
 }
 
 .kpi-card.clickable::after {
-  content: 'Megtekintés';
+  content: '👁️‍🗨️';
   position: absolute;
   bottom: 8px;
   right: 12px;
@@ -663,10 +701,7 @@
   flex: 1;
 }
 
-.expenses-wrapper {
-  /* ExpenseList saját stílusait használja */
-}
-
+/* ExpenseList saját stílusait használja */
 .expenses-wrapper .list-header {
   margin-bottom: 1rem;
 }
