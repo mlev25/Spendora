@@ -6,6 +6,7 @@
         "welcome": "Üdv",
         "logout": "Kijelentkezés",
         "home": "Főoldal",
+        "calendar": "Naptár",
         "profile": "Profil"
     },
     "footer":{
@@ -411,6 +412,19 @@
         "noUsers": "Nincsenek felhasználók",
         "loadError": "Hiba történt az adatok betöltése során!",
         "accessDenied": "Hozzáférés megtagadva! Adminisztrátori jogosultság szükséges.",
-        "never": "Soha"
-    }
+        "never": "Soha"    },
+    "calendar": {
+        "title": "Naptár",
+        "expenses": "Kiadások",
+        "totalForDay": "Napi összesen",
+        "noExpenses": "Nincsenek kiadások ezen a napon",
+        "days": {
+            "mon": "Hétfő",
+            "tue": "Kedd",
+            "wed": "Szerda",
+            "thu": "Csütörtök",
+            "fri": "Péntek",
+            "sat": "Szombat",
+            "sun": "Vasárnap"
+        }    }
 }

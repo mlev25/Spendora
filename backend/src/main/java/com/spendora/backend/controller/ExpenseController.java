@@ -142,4 +142,23 @@ public class ExpenseController {
                     .body("Error predicting category: " + e.getMessage());
         }
     }
+
+    @GetMapping("/calendar")
+    public ResponseEntity<?> getCalendarData(
+            @RequestParam Integer year,
+            @RequestParam Integer month,
+            Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+        }
+        
+        try {
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            var calendarData = expenseService.getCalendarData(userPrincipal.getId(), year, month);
+            return ResponseEntity.ok(calendarData);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error fetching calendar data: " + e.getMessage());
+        }
+    }
 }

@@ -5,8 +5,7 @@
         "register": "Register",
         "welcome": "Welcome",
         "logout": "Logout",
-        "home": "Home",
-        "profile": "Profile"
+        "home": "Home",        "calendar": "Calendar",        "profile": "Profile"
     },
     "footer": {
         "contact": "Contact",
@@ -409,5 +408,20 @@
         "loadError": "Error loading data!",
         "accessDenied": "Access denied! Administrator privileges required.",
         "never": "Never"
+    },
+    "calendar": {
+        "title": "Calendar",
+        "expenses": "Expenses",
+        "totalForDay": "Total for day",
+        "noExpenses": "No expenses on this day",
+        "days": {
+            "mon": "Mon",
+            "tue": "Tue",
+            "wed": "Wed",
+            "thu": "Thu",
+            "fri": "Fri",
+            "sat": "Sat",
+            "sun": "Sun"
+        }
     }
 }

@@ -36,4 +36,9 @@ public class ExpenseDTO {
     @NotNull(message = "Category ID must not be null")
     private Long categoryId;
 
+    // Category details for display
+    private String categoryName;
+    private String categoryColor;
+    private String categoryIcon;
+
 }

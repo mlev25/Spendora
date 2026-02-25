@@ -104,4 +104,15 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     @Query("SELECT MIN(e.price) FROM Expense e WHERE e.user.id = :userId")
     BigDecimal minByUser(@Param("userId") Long userId);
+
+    @Query("""
+        SELECT e FROM Expense e 
+        WHERE e.user.id = :userId 
+        AND YEAR(e.date) = :year 
+        AND MONTH(e.date) = :month
+        ORDER BY e.date
+    """)
+    List<Expense> findByUserIdAndYearAndMonth(@Param("userId") Long userId, 
+                                                @Param("year") Integer year, 
+                                                @Param("month") Integer month);
 }

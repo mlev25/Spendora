@@ -32,6 +32,5 @@ import './styles/LandingView.css';
 
 export default {
     name: 'LandingView'
-    // Nincs data, methods, stb., csak sima Vue komponens
 }
 </script>

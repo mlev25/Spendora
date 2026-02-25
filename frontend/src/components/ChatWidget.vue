@@ -17,7 +17,7 @@
         </div>
         <div class="chat-header-buttons">
           <button @click="resetChat" class="chat-reset-btn" :title="$t('chat.restart')">↻</button>
-          <button @click="closeChat" class="chat-close-btn" :title="$t('chat.close')">✕</button>
+          <button @click="closeChat" class="chat-close-btn" :title="$t('chat.close')">×</button>
         </div>
       </div>
 

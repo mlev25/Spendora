@@ -19,6 +19,7 @@
         <!-- Ha be van jelentkezve -->
         <template v-else>
           <router-link to="/home" class="nav-link">{{ $t('header.home') }}</router-link>
+          <router-link to="/calendar" class="nav-link">{{ $t('header.calendar') }}</router-link>
           <router-link to="/profile" class="nav-link">{{ $t('header.profile') }}</router-link>
           <router-link v-if="isAdmin" to="/admin" class="nav-link admin-link">Admin</router-link>
 

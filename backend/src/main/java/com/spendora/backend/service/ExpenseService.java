@@ -19,4 +19,5 @@ public interface ExpenseService {
     YearlyStatisticsDTO getYearlyStatistics(Long userId, Integer year);
     List<CategorySpendingDTO> getCategorySpending(Long userId, LocalDate startDate, LocalDate endDate);
     ExpenseSummaryDTO getExpenseSummary(Long userId);
+    List<CalendarDayDTO> getCalendarData(Long userId, Integer year, Integer month);
 }

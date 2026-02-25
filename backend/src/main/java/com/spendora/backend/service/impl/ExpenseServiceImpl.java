@@ -100,6 +100,10 @@ public class ExpenseServiceImpl implements ExpenseService {
         dto.setDate(expense.getDate());
         dto.setUserId(expense.getUser().getId());
         dto.setCategoryId(expense.getCategory().getId());
+        // Add category details for display
+        dto.setCategoryName(expense.getCategory().getName());
+        dto.setCategoryColor(expense.getCategory().getColor());
+        dto.setCategoryIcon(expense.getCategory().getIcon());
         return dto;
     }
 
@@ -248,6 +252,40 @@ public class ExpenseServiceImpl implements ExpenseService {
                 .highestExpense(highestExpense)
                 .lowestExpense(lowestExpense)
                 .build();
+    }
+
+    @Override
+    public List<CalendarDayDTO> getCalendarData(Long userId, Integer year, Integer month) {
+        // Get all expenses for the given month
+        List<Expense> expenses = expenseRepository.findByUserIdAndYearAndMonth(userId, year, month);
+        
+        // Group by date
+        Map<LocalDate, List<Expense>> groupedByDate = expenses.stream()
+                .collect(Collectors.groupingBy(Expense::getDate));
+        
+        // Convert to CalendarDayDTO list
+        return groupedByDate.entrySet().stream()
+                .map(entry -> {
+                    LocalDate date = entry.getKey();
+                    List<Expense> dayExpenses = entry.getValue();
+                    
+                    BigDecimal totalAmount = dayExpenses.stream()
+                            .map(Expense::getPrice)
+                            .reduce(BigDecimal.ZERO, BigDecimal::add);
+                    
+                    List<ExpenseDTO> expenseDTOs = dayExpenses.stream()
+                            .map(this::toDTO)
+                            .collect(Collectors.toList());
+                    
+                    return CalendarDayDTO.builder()
+                            .date(date)
+                            .totalAmount(totalAmount)
+                            .expenseCount(dayExpenses.size())
+                            .expenses(expenseDTOs)
+                            .build();
+                })
+                .sorted(Comparator.comparing(CalendarDayDTO::getDate))
+                .collect(Collectors.toList());
     }
 
 }
