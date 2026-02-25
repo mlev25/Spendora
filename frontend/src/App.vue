@@ -38,10 +38,6 @@ export default {
     
     provide('openChat', openChat);
     
-    // Debug log
-    console.log('Auth Store:', authStore);
-    console.log('Is Authenticated:', isAuthenticated.value);
-    
     return {
       isAuthenticated,
       chatWidget

@@ -24,11 +24,13 @@ const app = createApp(App);
 const pinia = createPinia();
 
 app.use(pinia);
-app.use(router);
-app.use(i18n);
-app.mount('#app');
 
 // Auth store inicializálása (token visszaállítása localStorage-ból)
+// FONTOS: Ez az app.mount() ELŐTT történik, hogy az App.vue setup-ban már elérhető legyen
 import { useAuthStore } from './stores/auth.js';
 const authStore = useAuthStore();
 authStore.initializeAuth();
+
+app.use(router);
+app.use(i18n);
+app.mount('#app');
