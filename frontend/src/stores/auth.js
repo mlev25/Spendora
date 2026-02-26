@@ -51,6 +51,10 @@ export const useAuthStore = defineStore('auth', {
     },
 
     logout() {
+      // Chat history törlése a kilépő felhasználóhoz
+      const userId = this.user?.id || this.user?.username || 'guest';
+      sessionStorage.removeItem(`chatMessages_${userId}`);
+
       this.user = null;
       this.token = null;
       this.isAuthenticated = false;

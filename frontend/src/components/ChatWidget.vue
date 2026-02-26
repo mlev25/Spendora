@@ -77,6 +77,8 @@
 import { chatService } from '@/services/api';
 import './styles/ChatWidget.css';
 
+import { useAuthStore } from '../stores/auth.js';
+
 export default {
   name: 'ChatWidget',
   data() {
@@ -87,9 +89,24 @@ export default {
       isLoading: false,
     };
   },
+  computed: {
+    storageKey() {
+      const authStore = useAuthStore();
+      const userId = authStore.user?.id || authStore.user?.username || 'guest';
+      return `chatMessages_${userId}`;
+    },
+  },
+  watch: {
+    // Ha a user vált (login/logout), töltse be az új user chat history-ját
+    storageKey(newKey) {
+      const saved = sessionStorage.getItem(newKey);
+      this.messages = saved ? JSON.parse(saved) : [];
+      this.isOpen = false;
+    },
+  },
   mounted() {
-    // Üzenetek betöltése sessionStorage-ból
-    const savedMessages = sessionStorage.getItem('chatMessages');
+    // Üzenetek betöltése sessionStorage-ból, felhasználó-specifikus kulccsal
+    const savedMessages = sessionStorage.getItem(this.storageKey);
     if (savedMessages) {
       try {
         this.messages = JSON.parse(savedMessages);
@@ -109,11 +126,8 @@ export default {
       // sessionStorage.removeItem('chatMessages');
     },
     resetChat() {
-      // Üzenetek törlése
       this.messages = [];
-      // SessionStorage törlése
-      sessionStorage.removeItem('chatMessages');
-      // Scroll to top
+      sessionStorage.removeItem(this.storageKey);
       this.$nextTick(() => {
         const container = this.$refs.messagesContainer;
         if (container) {
@@ -122,7 +136,7 @@ export default {
       });
     },
     saveMessages() {
-      sessionStorage.setItem('chatMessages', JSON.stringify(this.messages));
+      sessionStorage.setItem(this.storageKey, JSON.stringify(this.messages));
     },
     async sendMessage() {
       if (!this.userInput.trim() || this.isLoading) return;
