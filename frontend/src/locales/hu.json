@@ -23,7 +23,7 @@
         "subtitle": "A Spendora segít nyomon követni a kiadásaidat, és mutatja, hol spórolhatsz.",
         "card-left":{
             "title": "Költségkövetés",
-            "text": "Vidd fel kiadásaidat másodpercek alatt, akár automatikusan kategorizálva."
+            "text": "Vidd fel kiadásaidat másodpercek alatt, akár automatikusan kategorizálva. Tudd meg, hova megy el a pénzed!"
         },
         "card-center":{
             "title": "Kezdjük el!",
@@ -32,7 +32,7 @@
         },
         "card-right":{
             "title": "Statisztikák",
-            "text": "Légy tudatos: nézd meg a kiadásaidat gyönyörű diagramokon, és kérj tanácsot a személyreszabott chatbotunktól."
+            "text": "Légy tudatos: nézd meg a havi, vagy éves kiadásaidat gyönyörű diagramokon, és kérj tanácsot a személyreszabott chatbotunktól."
         }
     },
     "login": {

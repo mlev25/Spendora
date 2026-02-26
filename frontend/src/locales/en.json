@@ -19,7 +19,7 @@
         "subtitle": "Spendora helps you track your expenses and shows you where you can save money.",
         "card-left": {
             "title": "Expense Tracking",
-            "text": "Log your expenses in seconds, with optional automatic categorization."
+            "text": "Log your expenses in seconds, with optional automatic categorization. Be conscious of your finances and see where your money goes!"
         },
         "card-center": {
             "title": "Let's Get Started!",
@@ -28,7 +28,7 @@
         },
         "card-right": {
             "title": "Statistics",
-            "text": "Be conscious: view your spending on beautiful charts, and get advice from our personalized chatbot."
+            "text": "Be conscious: view your spending on beautiful charts, and get advice from our personalized chatbot. Learn about your spending habits and find ways to save money!"
         }
     },
     "login": {
