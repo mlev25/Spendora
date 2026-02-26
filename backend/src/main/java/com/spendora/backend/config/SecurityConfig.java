@@ -22,12 +22,18 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import org.springframework.beans.factory.annotation.Value;
+
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+
+    @Value("${cors.allowed-origins:http://localhost:5173,http://127.0.0.1:5173,http://localhost,http://localhost:80}")
+    private String allowedOriginsRaw;
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -71,7 +77,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://127.0.0.1:5173"));
+        List<String> allowedOrigins = Arrays.stream(allowedOriginsRaw.split(","))
+                .map(String::trim)
+                .toList();
+        configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
