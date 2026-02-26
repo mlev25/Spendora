@@ -1,8 +1,8 @@
 package com.spendora.backend.controller;
 
 import com.spendora.backend.config.jwt.UserPrincipal;
-import com.spendora.backend.dto.ExpenseDTO;
-import com.spendora.backend.dto.PredictCategoryRequest;
+import com.spendora.backend.dto.expense.ExpenseDTO;
+import com.spendora.backend.dto.expense.PredictCategoryRequest;
 import com.spendora.backend.service.GeminiService;
 import com.spendora.backend.service.impl.ExpenseServiceImpl;
 import jakarta.validation.Valid;

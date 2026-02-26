@@ -2,7 +2,11 @@ package com.spendora.backend.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.spendora.backend.config.jwt.UserPrincipal;
-import com.spendora.backend.dto.*;
+import com.spendora.backend.dto.auth.JwtResponse;
+import com.spendora.backend.dto.auth.LoginDTO;
+import com.spendora.backend.dto.auth.RegisterDTO;
+import com.spendora.backend.dto.shared.ErrorResponse;
+import com.spendora.backend.dto.user.UserDTO;
 import com.spendora.backend.entity.User;
 import com.spendora.backend.exception.CaptchaRequiredException;
 import com.spendora.backend.service.AuthService;

@@ -1,5 +1,6 @@
-package com.spendora.backend.dto;
+package com.spendora.backend.dto.statistics;
 
+import com.spendora.backend.dto.expense.ExpenseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

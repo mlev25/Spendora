@@ -1,4 +1,4 @@
-package com.spendora.backend.dto;
+package com.spendora.backend.dto.chat;
 
 public class ChatMessageDTO {
     private String role; // "user" or "assistant"

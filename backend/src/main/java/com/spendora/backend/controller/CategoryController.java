@@ -1,6 +1,6 @@
 package com.spendora.backend.controller;
 
-import com.spendora.backend.dto.CategoryDTO;
+import com.spendora.backend.dto.category.CategoryDTO;
 import com.spendora.backend.entity.Category;
 import com.spendora.backend.repository.CategoryRepository;
 import jakarta.validation.Valid;

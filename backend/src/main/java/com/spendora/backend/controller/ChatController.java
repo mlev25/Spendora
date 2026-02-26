@@ -1,8 +1,8 @@
 package com.spendora.backend.controller;
 
 import com.spendora.backend.config.jwt.UserPrincipal;
-import com.spendora.backend.dto.ChatRequestDTO;
-import com.spendora.backend.dto.ChatResponseDTO;
+import com.spendora.backend.dto.chat.ChatRequestDTO;
+import com.spendora.backend.dto.chat.ChatResponseDTO;
 import com.spendora.backend.service.impl.ChatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

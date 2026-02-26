@@ -1,4 +1,4 @@
-package com.spendora.backend.dto;
+package com.spendora.backend.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

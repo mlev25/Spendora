@@ -1,4 +1,4 @@
-package com.spendora.backend.dto;
+package com.spendora.backend.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

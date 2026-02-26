@@ -1,6 +1,6 @@
 package com.spendora.backend.controller;
 
-import com.spendora.backend.dto.ContactRequestDTO;
+import com.spendora.backend.dto.contact.ContactRequestDTO;
 import com.spendora.backend.service.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

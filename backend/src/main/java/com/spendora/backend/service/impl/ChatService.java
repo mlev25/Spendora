@@ -2,7 +2,7 @@ package com.spendora.backend.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spendora.backend.dto.ChatMessageDTO;
+import com.spendora.backend.dto.chat.ChatMessageDTO;
 import com.spendora.backend.entity.Expense;
 import com.spendora.backend.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Value;

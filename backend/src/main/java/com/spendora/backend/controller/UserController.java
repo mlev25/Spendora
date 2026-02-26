@@ -1,10 +1,10 @@
 package com.spendora.backend.controller;
 
 import com.spendora.backend.config.jwt.UserPrincipal;
-import com.spendora.backend.dto.ChangePasswordDTO;
-import com.spendora.backend.dto.DeleteAccountDTO;
-import com.spendora.backend.dto.UpdateProfileDTO;
-import com.spendora.backend.dto.UserDTO;
+import com.spendora.backend.dto.user.ChangePasswordDTO;
+import com.spendora.backend.dto.user.DeleteAccountDTO;
+import com.spendora.backend.dto.user.UpdateProfileDTO;
+import com.spendora.backend.dto.user.UserDTO;
 import com.spendora.backend.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -24,10 +24,30 @@ app.jwtExpirationMs=${JWT_EXPIRATION_MS:3600000}
 # Get your free API key from: https://openrouter.ai/keys
 openrouter.api.key=${OPENROUTER_API_KEY:}
 openrouter.api.url=https://openrouter.ai/api/v1/chat/completions
-openrouter.model=meta-llama/llama-3.2-3b-instruct:free
 
-# Gemini AI API (for category prediction - keep this!)
+#These are the tested models, the others are sometimes rate-limited
+#openrouter.model=meta-llama/llama-3.3-70b-instruct:free
+openrouter.model=qwen/qwen3-vl-30b-a3b-thinking
+#openrouter.model=deepseek/deepseek-r1-0528:free
+#openrouter.model=nousresearch/hermes-3-llama-3.1-405b:free
+
+
+# Gemini AI API
 # Set as environment variable: GEMINI_API_KEY
 # Get your free API key from: https://aistudio.google.com/apikey
 gemini.api.key=${GEMINI_API_KEY:}
 gemini.api.url=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent
+
+# Email (Contact form)
+# Gmail Settings
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+#The email address for smtp auth
+spring.mail.username=AUTH_EMAIL_ADDRESS
+#You need to set an application password for the account
+spring.mail.password=AUTH_APPLICATION_PASSWORD
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+#Destination email address, could be the same as the spring.mail.username
+contact.recipient.email=DEST_EMAIL_ADDRESS

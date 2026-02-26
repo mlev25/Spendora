@@ -350,7 +350,7 @@
           <h3>{{ periodLabel }} - {{ $t('statistics.expensesList') }}</h3>
           <button class="close-btn" @click="closeExpensesModal">×</button>
         </div>
-        <div class="modal-body">
+        
           <div class="expenses-wrapper">
             <ExpenseList
               :expenses="periodExpenses"
@@ -364,7 +364,7 @@
               @delete="handleDelete"
             />
           </div>
-        </div>
+       
       </div>
     </div>
   </div>

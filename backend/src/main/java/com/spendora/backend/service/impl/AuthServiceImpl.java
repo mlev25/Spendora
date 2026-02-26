@@ -2,9 +2,9 @@ package com.spendora.backend.service.impl;
 
 import com.spendora.backend.config.jwt.JwtUtils;
 import com.spendora.backend.config.jwt.UserPrincipal;
-import com.spendora.backend.dto.LoginDTO;
-import com.spendora.backend.dto.RegisterDTO;
-import com.spendora.backend.dto.UserDTO;
+import com.spendora.backend.dto.auth.LoginDTO;
+import com.spendora.backend.dto.auth.RegisterDTO;
+import com.spendora.backend.dto.user.UserDTO;
 import com.spendora.backend.entity.Role;
 import com.spendora.backend.entity.User;
 import com.spendora.backend.entity.util.RoleName;

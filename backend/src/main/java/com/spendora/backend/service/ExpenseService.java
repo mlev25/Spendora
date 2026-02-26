@@ -1,6 +1,11 @@
 package com.spendora.backend.service;
 
-import com.spendora.backend.dto.*;
+import com.spendora.backend.dto.category.CategorySpendingDTO;
+import com.spendora.backend.dto.expense.ExpenseDTO;
+import com.spendora.backend.dto.statistics.CalendarDayDTO;
+import com.spendora.backend.dto.statistics.ExpenseSummaryDTO;
+import com.spendora.backend.dto.statistics.MonthlyStatisticsDTO;
+import com.spendora.backend.dto.statistics.YearlyStatisticsDTO;
 
 import java.time.LocalDate;
 import java.util.List;

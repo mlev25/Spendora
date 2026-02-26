@@ -1,7 +1,10 @@
 package com.spendora.backend.controller;
 
 import com.spendora.backend.config.jwt.UserPrincipal;
-import com.spendora.backend.dto.*;
+import com.spendora.backend.dto.category.CategorySpendingDTO;
+import com.spendora.backend.dto.statistics.ExpenseSummaryDTO;
+import com.spendora.backend.dto.statistics.MonthlyStatisticsDTO;
+import com.spendora.backend.dto.statistics.YearlyStatisticsDTO;
 import com.spendora.backend.service.ExpenseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;

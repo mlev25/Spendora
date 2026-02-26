@@ -618,7 +618,7 @@ input[type="number"].form-control:-webkit-autofill:focus {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  padding: 1rem;
+  padding: 0.2rem;
   backdrop-filter: blur(4px);
   animation: fadeIn 0.2s ease;
 }
@@ -656,7 +656,7 @@ input[type="number"].form-control:-webkit-autofill:focus {
 }
 
 .modal-header {
-  padding: 1.5rem;
+  padding: 0.7rem;
   border-bottom: 1px solid #e9ecef;
   display: flex;
   justify-content: space-between;

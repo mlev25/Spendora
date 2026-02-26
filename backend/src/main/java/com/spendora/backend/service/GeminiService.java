@@ -1,6 +1,6 @@
 package com.spendora.backend.service;
 
-import com.spendora.backend.dto.PredictCategoryRequest;
+import com.spendora.backend.dto.expense.PredictCategoryRequest;
 
 public interface GeminiService {
     /**

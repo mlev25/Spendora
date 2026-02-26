@@ -1,8 +1,8 @@
 package com.spendora.backend.service.impl;
 
-import com.spendora.backend.dto.ChangePasswordDTO;
-import com.spendora.backend.dto.UpdateProfileDTO;
-import com.spendora.backend.dto.UserDTO;
+import com.spendora.backend.dto.user.ChangePasswordDTO;
+import com.spendora.backend.dto.user.UpdateProfileDTO;
+import com.spendora.backend.dto.user.UserDTO;
 import com.spendora.backend.entity.User;
 import com.spendora.backend.repository.UserRepository;
 import com.spendora.backend.service.UserService;

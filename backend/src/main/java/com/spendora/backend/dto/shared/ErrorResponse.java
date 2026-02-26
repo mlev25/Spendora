@@ -1,4 +1,4 @@
-package com.spendora.backend.dto;
+package com.spendora.backend.dto.shared;
 
 public class ErrorResponse {
 

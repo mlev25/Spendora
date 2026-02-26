@@ -2,7 +2,7 @@ package com.spendora.backend.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spendora.backend.dto.PredictCategoryRequest;
+import com.spendora.backend.dto.expense.PredictCategoryRequest;
 import com.spendora.backend.entity.Category;
 import com.spendora.backend.repository.CategoryRepository;
 import com.spendora.backend.service.GeminiService;

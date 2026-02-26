@@ -1,6 +1,6 @@
 package com.spendora.backend.controller;
 
-import com.spendora.backend.dto.UserDTO;
+import com.spendora.backend.dto.user.UserDTO;
 import com.spendora.backend.entity.User;
 import com.spendora.backend.repository.ExpenseRepository;
 import com.spendora.backend.repository.UserRepository;

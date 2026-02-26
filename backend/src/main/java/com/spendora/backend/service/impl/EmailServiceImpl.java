@@ -1,6 +1,6 @@
 package com.spendora.backend.service.impl;
 
-import com.spendora.backend.dto.ContactRequestDTO;
+import com.spendora.backend.dto.contact.ContactRequestDTO;
 import com.spendora.backend.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
