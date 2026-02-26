@@ -137,6 +137,7 @@ export default {
       useAiPrediction: false,
       aiPredicting: false,
       aiPredictedMessage: '',
+      isAiSettingCategory: false,
     };
   },
   computed: {
@@ -163,7 +164,7 @@ export default {
     },
     'formData.categoryId'(newVal, oldVal) {
       // Ha a user manuálisan változtatja a kategóriát, és nem az AI állította be
-      if (newVal && !this.aiPredicting && this.useAiPrediction) {
+      if (newVal && !this.aiPredicting && this.useAiPrediction && !this.isAiSettingCategory) {
         this.useAiPrediction = false;
         this.aiPredictedMessage = '';
       }
@@ -222,6 +223,7 @@ export default {
       this.useAiPrediction = false;
       this.aiPredicting = false;
       this.aiPredictedMessage = '';
+      this.isAiSettingCategory = false;
     },
     async handleAiToggle() {
       if (this.useAiPrediction && this.formData.name) {
@@ -246,8 +248,15 @@ export default {
         );
 
         if (predictedCategory) {
+          // Jelezzük hogy az AI állítja be a kategóriát
+          this.isAiSettingCategory = true;
           this.formData.categoryId = predictedCategory.id;
           this.aiPredictedMessage = this.$t('expense.aiSuccess');
+          
+          // Flag visszaállítása kis késleltetéssel (hogy a watcher ne fusson le)
+          setTimeout(() => {
+            this.isAiSettingCategory = false;
+          }, 100);
           
           // Üzenet eltüntetése 3 másodperc után
           setTimeout(() => {
