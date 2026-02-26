@@ -360,6 +360,7 @@
               :hide-filters="true"
               :hide-title="true"
               :read-only="true"
+              @add="navigateToAddExpense"
               @edit="handleEdit"
               @delete="handleDelete"
             />
@@ -1087,6 +1088,11 @@ export default {
     closeExpensesModal() {
       this.showExpensesModal = false;
       this.periodExpenses = [];
+    },
+
+    navigateToAddExpense() {
+      this.closeExpensesModal();
+      this.$router.push({ path: '/home', query: { openAddModal: 'true' } });
     },
 
     handleEdit(expense) {

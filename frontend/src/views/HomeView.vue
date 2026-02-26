@@ -203,6 +203,9 @@ export default {
   },
   async mounted() {
     await this.loadData();
+    if (this.$route.query.openAddModal === 'true') {
+      this.openAddModal();
+    }
   },
   methods: {
     async loadData() {
