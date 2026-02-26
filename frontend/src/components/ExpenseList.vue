@@ -79,7 +79,7 @@
             </td>
             <td class="price-cell">{{ formatPrice(expense.price) }} Ft</td>
             <td>{{ formatDate(expense.date) }}</td>
-            <td v-if="!readOnly">
+            <td v-if="!readOnly" class="action-cell">
               <div class="action-buttons">
                 <button
                   class="btn-icon btn-edit"
