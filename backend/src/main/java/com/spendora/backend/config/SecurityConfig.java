@@ -55,6 +55,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/contact").permitAll()
                         .anyRequest().authenticated()
                 )
                 // Stateless for JWT but allows session creation for CAPTCHA on auth endpoints

@@ -130,7 +130,8 @@
             "message": "Üzenet",
             "send": "Üzenet küldése",
             "sending": "Küldés...",
-            "success": "Üzenet sikeresen elküldve! Hamarosan válaszolunk."
+            "success": "Üzenet sikeresen elküldve! Hamarosan válaszolunk.",
+            "error": "Az üzenet küldése sikertelen. Kérjük próbáld újra később."
         }
     },
     "about": {

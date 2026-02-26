@@ -77,6 +77,10 @@
           <div v-if="successMessage" class="alert alert-success">
             {{ successMessage }}
           </div>
+
+          <div v-if="errorMessage" class="alert alert-error">
+            {{ errorMessage }}
+          </div>
         </form>
       </div>
     </div>
@@ -84,6 +88,7 @@
 </template>
 
 <script>
+import { contactService } from '../services/contactService';
 import './styles/ContactView.css';
 
 export default {
@@ -97,22 +102,25 @@ export default {
         message: ''
       },
       isSubmitting: false,
-      successMessage: ''
+      successMessage: '',
+      errorMessage: ''
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       this.isSubmitting = true;
-      // Szimuláljuk az elküldést
-      setTimeout(() => {
+      this.successMessage = '';
+      this.errorMessage = '';
+      try {
+        await contactService.sendMessage(this.formData);
         this.successMessage = this.$t('contact.form.success');
         this.formData = { name: '', email: '', subject: '', message: '' };
+        setTimeout(() => { this.successMessage = ''; }, 5000);
+      } catch (error) {
+        this.errorMessage = this.$t('contact.form.error');
+      } finally {
         this.isSubmitting = false;
-        
-        setTimeout(() => {
-          this.successMessage = '';
-        }, 5000);
-      }, 1000);
+      }
     }
   }
 };
