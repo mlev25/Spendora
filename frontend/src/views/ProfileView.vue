@@ -28,18 +28,6 @@
           />
         </div>
 
-        <div class="form-group">
-          <label for="email">{{ $t('profile.email') }}</label>
-          <input
-            type="email"
-            id="email"
-            v-model="userEmail"
-            class="form-control"
-            disabled
-          />
-          <small class="form-hint">{{ $t('profile.emailHint') }}</small>
-        </div>
-
         <div v-if="profileError" class="alert alert-error">
           {{ profileError }}
         </div>

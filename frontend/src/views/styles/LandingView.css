@@ -4,7 +4,7 @@
     background-color: var(--color-background);
     min-height: 70vh;
     border-radius: 1.5rem;
-    background-image: url('C:/Users/levik/EGYETEM/Szakdolgozat/Spendora/frontend/public/bg5.jpg');
+    /*background-image: url('/public/bg5.jpg');*/
     background-size: cover;
     background-repeat: repeat;
 }

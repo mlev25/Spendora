@@ -72,6 +72,17 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const authStore = useAuthStore();
     
+    // Token érvényesség ellenőrzése minden navigációnál
+    if (authStore.isLoggedIn) {
+        const isValid = authStore.checkTokenValidity();
+        if (!isValid && to.meta.requiresAuth) {
+            // Token lejárt és védett oldalra próbál menni
+            alert('A munkameneted lejárt. Kérlek jelentkezz be újra.');
+            next('/login');
+            return;
+        }
+    }
+    
     // Admin oldal védelem
     if (to.meta.requiresAdmin) {
         const user = authStore.getUser;

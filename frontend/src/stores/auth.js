@@ -1,6 +1,29 @@
 import { defineStore } from 'pinia';
 import { setAuthToken } from '../services/api.js';
 
+// JWT token dekódolása és ellenőrzése
+function isTokenExpired(token) {
+  if (!token) return true;
+  
+  try {
+    // JWT payload dekódolása (format: header.payload.signature)
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    
+    // exp mező Unix timestamp másodpercben
+    if (payload.exp) {
+      const currentTime = Math.floor(Date.now() / 1000);
+      return payload.exp < currentTime;
+    }
+    
+    // Ha nincs exp mező, biztonsági okokból lejártnak tekintjük
+    console.warn('Token has no expiration field - treating as expired');
+    return true;
+  } catch (error) {
+    console.error('Token parsing error:', error);
+    return true; // Ha nem lehet dekódolni, tekintjük lejártnak
+  }
+}
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
@@ -41,11 +64,31 @@ export const useAuthStore = defineStore('auth', {
       const user = localStorage.getItem('user');
 
       if (token && user) {
+        // Ellenőrizzük, hogy a token még érvényes-e
+        if (isTokenExpired(token)) {
+          console.log('Token expired, logging out...');
+          this.logout();
+          return;
+        }
+
         this.token = token;
         this.user = JSON.parse(user);
         this.isAuthenticated = true;
         setAuthToken(token);
       }
+    },
+
+    // Token érvényesség ellenőrzése (pl. navigation guard-hoz)
+    checkTokenValidity() {
+      if (this.isAuthenticated && this.token) {
+        if (isTokenExpired(this.token)) {
+          console.log('Token expired during session, logging out...');
+          this.logout();
+          return false;
+        }
+        return true;
+      }
+      return false;
     },
   },
 });
