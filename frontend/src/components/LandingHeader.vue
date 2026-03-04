@@ -42,7 +42,7 @@ export default {
     name: 'LandingHeader',
     data() {
         return {
-            isDark: false,
+            isDark: localStorage.getItem('theme') === 'dark',
             currentLang: 'HU'
         };
     },
@@ -68,6 +68,7 @@ export default {
             this.isDark = !this.isDark;
             const theme = this.isDark ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
         },
         setLang(localeCode) {
             this.$i18n.locale = localeCode;
@@ -81,8 +82,9 @@ export default {
         }
     },
     mounted() {
-        const initialTheme = this.isDark ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', initialTheme);
+        // A theme már be van állítva a main.js-ben, itt csak biztosítjuk a szinkront
+        const theme = this.isDark ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
         
         // Betöltjük a tárolt nyelvet
         const savedLocale = localStorage.getItem('locale') || 'hu';

@@ -10,7 +10,7 @@
       <div class="contact-info-section">
         <div class="info-card">
           <h3>{{ $t('contact.email.title') }}</h3>
-          <p>spendora.support@example.com</p>
+          <p>spendora.support@gmail.com</p>
         </div>
 
         <div class="info-card">

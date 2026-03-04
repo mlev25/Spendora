@@ -9,6 +9,10 @@ import { createI18n } from 'vue-i18n';
 import hu from './locales/hu.json';
 import en from './locales/en.json';
 
+// Téma beállítása az app betöltése előtt (flash elkerülése)
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
 const i18n = createI18n({
   locale: localStorage.getItem('locale') || 'hu',
   fallbackLocale: 'en',
