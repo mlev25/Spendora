@@ -437,6 +437,7 @@ input[type="number"].form-control:-webkit-autofill:focus {
 
 .kpi-grid-desktop {
   display: flex;
+  color: wheat;
 }
 
 .kpi-carousel-wrapper {
