@@ -5,19 +5,22 @@
 }
 
 .stat-card {
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  border: 1px solid var(--color-border) !important;
+  background: linear-gradient(135deg, var(--color-card-bg) 0%, color-mix(in srgb, var(--color-card-bg) 90%, var(--color-primary)) 100%) !important;
+  box-shadow: var(--shadow-sm);
+  border-radius: 14px !important;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md) !important;
+  border-color: var(--color-primary) !important;
 }
 
 .stat-card h2 {
-  color: #007bff;
-  font-weight: bold;
+  color: var(--color-primary);
+  font-weight: 700;
 }
 
 .table {
@@ -25,11 +28,11 @@
 }
 
 .table thead {
-  background: #f8f9fa;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-background) 90%, var(--color-primary)) 0%, var(--color-background) 100%);
 }
 
 .table tbody tr:hover {
-  background: #f8f9fa;
+  background: rgba(124, 58, 237, 0.05);
 }
 
 .badge {

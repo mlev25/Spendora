@@ -4,32 +4,34 @@
   margin: 0 auto;
 }
 
-/* Input styling fix - no blue background */
+/* Input styling fix */
 input[type="number"].form-control,
 select.form-select {
-  background-color: #fff !important;
+  background-color: var(--color-card-bg) !important;
   -webkit-appearance: none;
   appearance: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text);
 }
 
 input[type="number"].form-control:focus,
 select.form-select:focus {
-  background-color: #fff !important;
+  background-color: var(--color-card-bg) !important;
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
 }
 
 /* Prevent autofill styling */
 input[type="number"].form-control:-webkit-autofill,
 input[type="number"].form-control:-webkit-autofill:hover,
 input[type="number"].form-control:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px white inset !important;
-  box-shadow: 0 0 0 1000px white inset !important;
-  background-color: white !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--color-card-bg) inset !important;
+  box-shadow: 0 0 0 1000px var(--color-card-bg) inset !important;
 }
 
-/* Mobile responsive select/input */
+/* Mobile responsive */
 @media (max-width: 768px) {
   .statistics-container {
     padding: 1rem;
@@ -37,7 +39,7 @@ input[type="number"].form-control:-webkit-autofill:focus {
   
   select.form-select,
   input[type="number"].form-control {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
     padding: 0.5rem;
   }
 }
@@ -45,28 +47,31 @@ input[type="number"].form-control:-webkit-autofill:focus {
 .kpi-card {
   transition: transform 0.2s, box-shadow 0.2s;
   height: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border) !important;
+  background: var(--color-card-bg) !important;
+  border-radius: 14px;
 }
 
 .kpi-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.15);
-  background-color: #daf3f5;
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary) !important;
 }
 
 .kpi-card h3 {
-  color: #007bff;
-  font-weight: 600;
+  color: var(--color-primary);
+  font-weight: 700;
   font-size: 1.5rem;
 }
 
 .kpi-card h6 {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   margin-bottom: 0.75rem;
-  color: #6c757d;
+  color: var(--color-muted, rgba(30, 16, 64, 0.6));
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .chart-card {
@@ -125,7 +130,7 @@ input[type="number"].form-control:-webkit-autofill:focus {
 .category-rank {
   font-size: 1.25rem;
   font-weight: bold;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -163,7 +168,7 @@ input[type="number"].form-control:-webkit-autofill:focus {
 .amount-value {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #007bff;
+  color: var(--color-primary);
 }
 
 .amount-percentage {

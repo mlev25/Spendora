@@ -256,8 +256,8 @@
 }
 
 .btn-edit:hover {
-  border-color: #007bff;
-  background: linear-gradient(135deg, rgba(0, 123, 255, 0.12) 0%, rgba(0, 123, 255, 0.06) 100%);
+  border-color: var(--color-primary);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
 }
 
 .btn-delete:hover {

@@ -1,12 +1,10 @@
 .app-footer {
-    border-top: 1px solid var(--color-border);
-    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    background: linear-gradient(135deg, var(--color-card-bg) 0%, color-mix(in srgb, var(--color-card-bg) 92%, var(--color-primary)) 100%);
     padding: 15px 0;
-    transition: background-color 0.3s;
-    border-radius: 12px;
-    margin-right: 5px;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    border-radius: 14px;
+    margin: 0 5px 5px 5px;
+    box-shadow: var(--shadow-sm);
 }
 
 .footer-container {

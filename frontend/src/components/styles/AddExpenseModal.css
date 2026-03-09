@@ -120,9 +120,9 @@ textarea.form-control {
 }
 
 .ai-checkbox-group {
-  background-color: rgba(0, 123, 255, 0.05);
-  border: 1px dashed rgba(0, 123, 255, 0.3);
-  border-radius: 8px;
+  background: rgba(124, 58, 237, 0.05);
+  border: 1px dashed rgba(124, 58, 237, 0.35);
+  border-radius: 10px;
   padding: 1rem;
   margin: 1.5rem 0;
 }
@@ -184,12 +184,14 @@ textarea.form-control {
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
   color: white;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4);
 }
 
 .btn-primary:disabled {
